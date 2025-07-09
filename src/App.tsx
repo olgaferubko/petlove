@@ -1,12 +1,18 @@
-import { useState } from 'react'
+import { Suspense, lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 
-  return (
-    <>
-    </>
-  )
-}
+const App: React.FC = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
-export default App
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
+  </Suspense>
+);
+
+export default App;
