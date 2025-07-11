@@ -1,0 +1,12 @@
+.logo {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-main-text);
+}
+
+.heartIcon {
+    fill: var(--color-orange);
+}

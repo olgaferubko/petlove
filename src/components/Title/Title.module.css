@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.title {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-main-text);
+}
+
+.subtitle {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    color: var(--color-main-text);
+}

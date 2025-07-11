@@ -1,0 +1,55 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    visibility: hidden;
+    opacity: 0;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    z-index: 10;
+}
+
+.open {
+    visibility: visible;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 58%;
+    max-width: 300px;
+    height: 100%;
+    background-color: #fff;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 20;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 20px;
+    padding-bottom: 40px;
+}
+
+.openDrawer {
+    transform: translateX(0);
+}
+
+.drawerDefaultBg {
+    background: var(--color-primary);
+}
+
+.drawerAuthBg {
+    background: var(--color-orange);
+}
+
+.closeBtn {
+    background: none;
+    border: none;
+    display: block;
+}

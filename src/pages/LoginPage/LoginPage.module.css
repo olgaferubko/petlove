@@ -1,0 +1,31 @@
+.container {
+    padding: 20px;
+    padding-top: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.account {
+    text-align: center;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.16667;
+    letter-spacing: -0.03em;
+    color: var(--color-grey);
+}
+
+.register {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+    color: var(--color-orange);
+}

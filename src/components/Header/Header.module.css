@@ -1,0 +1,16 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.burger {
+    background: transparent;
+    outline: none;
+}
+
+.iconBurger {
+    stroke: var(--color-main-text);
+}

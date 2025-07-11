@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Header from '../../components/Header/Header';
 import PetBlock from '../../components/PetBlock/PetBlock';
 import Title from '../../components/Title/Title';
 import RegisterForm from '../../components/RegisterForm/RegisterForm';
@@ -6,6 +7,7 @@ import RegisterForm from '../../components/RegisterForm/RegisterForm';
 const RegisterPage: React.FC = () => {
   return (
     <main>
+      <Header />
       <PetBlock
         desktop1x="/images/register-desktop.jpg"
         desktop2x="/images/register-desktop@2x.jpg"

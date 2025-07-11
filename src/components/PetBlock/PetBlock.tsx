@@ -1,3 +1,5 @@
+import s from './PetBlock.module.css'
+
 interface PetBlockProps {
   desktop1x: string;
   desktop2x?: string;
@@ -28,8 +30,8 @@ const PetBlock: React.FC<PetBlockProps> = ({
     : `${mobile1x} 1x`;
 
   return (
-    <section className="pet-block">
-      <picture>
+    <section className={s.petBlock}>
+      <picture >
         <source
           media="(min-width:1280px)"
           srcSet={desktopSrcSet}
@@ -42,7 +44,7 @@ const PetBlock: React.FC<PetBlockProps> = ({
           src={mobile1x}
           srcSet={mobileSrcSet}
           alt={alt}
-          className="pet-block__image"
+          className={s.petBlockImage}
         />
       </picture>
     </section>

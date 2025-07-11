@@ -5,7 +5,7 @@ export const loginSchema = Yup.object({
     .required('Email is required')
     .matches(
       /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
-      'Invalid email format'
+      'Enter a valid Email'
     ),
   password: Yup.string()
     .required('Password is required')

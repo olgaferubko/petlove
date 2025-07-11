@@ -2,10 +2,13 @@ import { Link } from 'react-router-dom';
 import PetBlock from '../../components/PetBlock/PetBlock';
 import Title from '../../components/Title/Title';
 import LoginForm from '../../components/LoginForm/LoginForm';
+import Header from "../../components/Header/Header";
+import s from './LoginPage.module.css'
 
 const LoginPage: React.FC = () => {
   return (
-    <main>
+    <main className={s.container}>
+      <Header />
       <PetBlock
         desktop1x="/images/login-desktop.jpg"
         desktop2x="/images/login-desktop@2x.jpg"
@@ -15,16 +18,16 @@ const LoginPage: React.FC = () => {
         mobile2x="/images/login-mobile@2x.jpg"
         alt="Join PetLove — your pet's new best friend"
       />
-      <section>
+      <section className={s.loginForm}>
         <Title
           text="Log in"
           subtitle="Welcome! Please enter your credentials to login to the platform:"
         />
         <LoginForm />
 
-        <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+        <p className={s.account}>
           Don't have an account?{' '}
-          <Link to="/register">
+          <Link to="/register" className={s.register}>
             Register
           </Link>
         </p>

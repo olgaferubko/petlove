@@ -1,0 +1,56 @@
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.title {
+    margin: 0 0 16px;
+    font-size: 1.125rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.cancelBtn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.confirmBtn {
+    background: #f6b83d;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
