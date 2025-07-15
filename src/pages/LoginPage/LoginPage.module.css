@@ -19,7 +19,7 @@
     font-size: 12px;
     line-height: 1.16667;
     letter-spacing: -0.03em;
-    color: var(--color-grey);
+    color: rgba(38, 38, 38, 0.5)
 }
 
 .register {
@@ -27,5 +27,5 @@
     font-weight: 700;
     text-decoration: underline;
     text-decoration-skip-ink: none;
-    color: var(--color-orange);
+    color: #f6b83d;
 }

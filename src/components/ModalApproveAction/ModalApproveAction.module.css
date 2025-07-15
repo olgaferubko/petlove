@@ -1,6 +1,9 @@
 .backdrop {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
@@ -10,47 +13,83 @@
 
 .modal {
     background: #fff;
-    border-radius: 8px;
-    padding: 24px;
+    padding: 40px 28px;
+    border-radius: 30px;
     position: relative;
-    width: 90%;
-    max-width: 400px;
+    width: 335px;
+    max-width: 90%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .closeBtn {
     position: absolute;
-    top: 12px;
-    right: 12px;
-    background: transparent;
+    top: 10px;
+    right: 10px;
+    background: none;
     border: none;
-    font-size: 1.25rem;
-    cursor: pointer;
 }
 
-.title {
-    margin: 0 0 16px;
-    font-size: 1.125rem;
-}
-
-.actions {
+.imageWrapper {
+    border-radius: 100%;
+    background: #fff4df;
+    width: 80px;
+    height: 80px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    padding: 18px;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: #262626;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
     gap: 8px;
+    width: 100%;
+}
+
+.yesBtn {
+    border-radius: 30px;
+    text-align: center;
+    padding: 12px;
+    background: #f6b83d;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #fff;
+    width: 100%;
 }
 
 .cancelBtn {
-    background: transparent;
-    border: 1px solid #ccc;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 30px;
+    text-align: center;
+    padding: 12px;
+    background: rgba(38, 38, 38, 0.05);
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+    width: 100%;
 }
 
-.confirmBtn {
-    background: #f6b83d;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    color: #fff;
-    cursor: pointer;
+.error {
+    color: red;
+    margin-top: 0.5rem;
 }

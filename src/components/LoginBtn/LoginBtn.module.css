@@ -1,0 +1,31 @@
+.authPageStyle {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 30px;
+    font-weight: 700;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #fff;
+    background: transparent;
+}
+
+.defaultStyle {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    border-radius: 30px;
+    border: none;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: #fff;
+    background: #f6b83d;
+}

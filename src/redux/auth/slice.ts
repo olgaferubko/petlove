@@ -36,6 +36,7 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        localStorage.setItem('token', action.payload.token);
       }
     );
     builder.addCase(registerUser.rejected, (state, action) => {
@@ -54,6 +55,7 @@ const authSlice = createSlice({
         state.user = action.payload.user;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+        localStorage.setItem('token', action.payload.token);
       }
     );
     builder.addCase(loginUser.rejected, (state, action) => {
@@ -70,6 +72,7 @@ const authSlice = createSlice({
         state.user = null;
         state.token = null;
         state.isLoggedIn = false;
+        localStorage.removeItem('token');
     });
     builder.addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -88,7 +91,7 @@ const authSlice = createSlice({
       (state, action: PayloadAction<CurrentUserResponse>) => {
         state.isRefreshing = false;
         state.user = action.payload;
-        state.isLoggedIn = true;
+        state.isLoggedIn = Boolean(action.payload);
       }
     );
     builder.addCase(fetchCurrentUser.rejected, (state, action) => {

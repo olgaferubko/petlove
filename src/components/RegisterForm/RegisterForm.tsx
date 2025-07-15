@@ -1,34 +1,43 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from '../../validations/registrationFormValidation';
-import { useAppDispatch } from '../../redux/auth/hooks';
-import { registerUser } from '../../redux/auth/operations';
-import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { registerSchema } from '../../validations/registrationFormValidation'
+import { useAppDispatch } from '../../redux/auth/hooks'
+import { registerUser } from '../../redux/auth/operations'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import s from '../LoginForm/LoginForm.module.css'
 
-type FormValues = {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+interface FormValues {
+  name: string
+  email: string
+  password: string
+  confirmPassword: string
+}
 
-export default function RegistrationForm() {
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+const ICONS_SPRITE = '/icons.svg'
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+const RegistrationForm: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, touchedFields },
+    watch,
+    formState: { errors, isValid }
   } = useForm<FormValues>({
     resolver: yupResolver(registerSchema),
     mode: 'onChange',
-  });
+  })
+
+  const watchedName = watch('name', '')
+  const watchedEmail = watch('email', '')
+  const watchedPassword = watch('password', '')
+  const watchedConfirm = watch('confirmPassword', '')
+
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
 
   const onSubmit = async (data: FormValues) => {
     try {
@@ -38,68 +47,116 @@ export default function RegistrationForm() {
           email: data.email.trim(),
           password: data.password,
         })
-      ).unwrap();
-      navigate('/profile');
+      ).unwrap()
+      toast.success('Registration successful!')
+      navigate('/profile', { replace: true })
     } catch (err: any) {
-      toast.error(err);
+      toast.error(err ?? 'Registration failed')
     }
-  };
-
-  const renderToggle = (visible: boolean, onClick: () => void) => (
-    <button type="button" onClick={onClick} className="toggle-btn">
-      <svg width="20" height="20">
-        <use xlinkHref={visible ? '#icon-eye' : '#icon-eye-off'} />
-      </svg>
-    </button>
-  );
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className={`field ${errors.name ? 'error' : touchedFields.name ? 'success' : ''}`}>
-        <input placeholder="Name" {...register('name')} autoComplete="off" />
-        {errors.name && <p className="field__message">{errors.name.message}</p>}
-      </div>
+    <form onSubmit={handleSubmit(onSubmit)} className={s.form} noValidate>
+      <div className={s.wrapper}>
 
-      <div className={`field ${errors.email ? 'error' : touchedFields.email ? 'success' : ''}`}>
-        <input placeholder="Email" {...register('email')} autoComplete="off" />
-        {errors.email ? (
-          <p className="field__message">{errors.email.message}</p>
-        ) : touchedFields.email ? (
-          <p className="field__message field__message--ok">Looks good</p>
-        ) : null}
-      </div>
+        <label className={`${s.field} ${watchedName && errors.name ? s.invalid : ''}`}>
+          <input
+            type="text"
+            placeholder="Name"
+            {...register('name')}
+            className={s.input}
+          />
+          {watchedName && errors.name && (
+            <svg className={s.iconError} width={18} height={18}>
+              <use href={`${ICONS_SPRITE}#icon-x`} />
+            </svg>
+          )}
+        </label>
+        {errors.name && <p className={s.error}>{errors.name.message}</p>}
 
-      <div className={`field ${errors.password ? 'error' : touchedFields.password ? 'success' : ''}`}>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Password"
-          {...register('password')}
-          autoComplete="new-password"
-        />
-        {renderToggle(showPassword, () => setShowPassword(v => !v))}
+        <label className={`${s.field} ${watchedEmail && errors.email ? s.invalid : ''}`}>
+          <input
+            type="email"
+            placeholder="Email"
+            {...register('email')}
+            className={s.input}
+          />
+          {watchedEmail && errors.email && (
+            <svg className={s.iconError} width={18} height={18}>
+              <use href={`${ICONS_SPRITE}#icon-x`} />
+            </svg>
+          )}
+        </label>
+        {errors.email && <p className={s.error}>{errors.email.message}</p>}
+
+        <label className={`${s.field} ${
+          errors.password ? s.invalid : watchedPassword ? s.valid : ''
+        }`}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            {...register('password')}
+            className={s.input}
+            autoComplete="new-password"
+          />
+          <div className={s.iconWrapper}>
+            {watchedPassword && !errors.password && (
+              <svg className={s.iconCheck} width={18} height={18}>
+                <use href={`${ICONS_SPRITE}#icon-check`} />
+              </svg>
+            )}
+            <button
+              type="button"
+              className={s.toggleBtn}
+              onClick={() => setShowPassword(v => !v)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              <svg className={s.iconEye} width={18} height={18}>
+                <use href={`${ICONS_SPRITE}#icon-eye-off`} />
+              </svg>
+            </button>
+          </div>
+        </label>
         {errors.password ? (
-          <p className="field__message">{errors.password.message}</p>
-        ) : touchedFields.password ? (
-          <p className="field__message field__message--ok">Password is secure</p>
+          <p className={s.error}>{errors.password.message}</p>
+        ) : watchedPassword ? (
+          <p className={s.success}>Password is secure</p>
         ) : null}
-      </div>
 
-      <div className={`field ${errors.confirmPassword ? 'error' : touchedFields.confirmPassword ? 'success' : ''}`}>
-        <input
-          type={showConfirm ? 'text' : 'password'}
-          placeholder="Confirm password"
-          {...register('confirmPassword')}
-          autoComplete="new-password"
-        />
-        {renderToggle(showConfirm, () => setShowConfirm(v => !v))}
+        <label className={`${s.field} ${
+          errors.password ? s.invalid : watchedPassword ? s.valid : ''
+        }`}>
+          <input
+            type={showConfirm ? 'text' : 'password'}
+            placeholder="Confirm password"
+            {...register('confirmPassword')}
+            className={s.input}
+            autoComplete="new-password"
+          />
+          <div className={s.iconWrapper}>
+            <button
+              type="button"
+              className={s.toggleBtn}
+              onClick={() => setShowConfirm(v => !v)}
+              aria-label={showConfirm ? 'Hide confirm password' : 'Show confirm password'}
+            >
+              <svg className={s.iconEye} width={18} height={18}>
+                <use href={`${ICONS_SPRITE}#icon-eye-off`} />
+              </svg>
+            </button>
+          </div>
+        </label>
         {errors.confirmPassword && (
-          <p className="field__message">{errors.confirmPassword.message}</p>
+          <p className={s.error}>{errors.confirmPassword.message}</p>
         )}
+
       </div>
 
-      <button type="submit" disabled={!isValid} className="submit-btn">
-        REGISTRATION
+      <button type="submit" className={s.submitBtn} disabled={!isValid}>
+        Registration
       </button>
     </form>
-  );
+  )
 }
+
+export default RegistrationForm

@@ -3,8 +3,9 @@ import s from './Logo.module.css';
 
 const Logo: React.FC = () => {
   return (
-    <Link to="/" className={s.logo}>
+    <Link to="/home" className={s.logo}>
       <span>petl</span>
+      <div className={s.iconWrapper}>
       <svg
         className={s.heartIcon}
         width={17}
@@ -13,7 +14,8 @@ const Logo: React.FC = () => {
         focusable="false"
       >
         <use href="/icons.svg#icon-heart-circle" />
-      </svg>
+        </svg>
+        </div>
       <span>ve</span>
     </Link>
   );

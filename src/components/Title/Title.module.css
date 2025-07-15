@@ -10,7 +10,7 @@
     font-size: 28px;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: var(--color-main-text);
+    color: #262626;
 }
 
 .subtitle {
@@ -19,5 +19,5 @@
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.02em;
-    color: var(--color-main-text);
+    color: #262626;
 }

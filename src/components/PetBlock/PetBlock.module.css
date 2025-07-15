@@ -1,7 +1,4 @@
-
-.petBlock__image {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+.picture {
+    display: flex;
+    justify-content: center;
 }

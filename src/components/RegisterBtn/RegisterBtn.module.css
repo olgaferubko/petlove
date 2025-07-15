@@ -1,13 +1,14 @@
-.logoutBtn {
+.registerBtn {
     border-radius: 30px;
-    padding: 12px 60px;
-    background: #fff4df;
-    color: #f6b83d;
+    text-align: center;
+    width: 100%;
+    padding: 12px;
     font-family: "Manrope", sans-serif;
     font-weight: 700;
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.03em;
     text-transform: uppercase;
-    text-align: center;
+    color: #f6b83d;
+    background: #fff4df;
 }

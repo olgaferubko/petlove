@@ -5,13 +5,14 @@
     align-items: center;
 }
 
-.item {
+.itemAuth {
     font-family: "Manrope", sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.03em;
-    color: var(--color-primary);
+    color: #fff;
+    background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 30px;
     padding: 15px 0;
@@ -19,6 +20,25 @@
     width: 119px;
 }
 
-.active {
+.item {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+    background: transparent;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    border-radius: 30px;
+    padding: 15px 0;
+    text-align: center;
+    width: 119px;
+}
+
+.activeAuth {
     border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.active {
+    border: 1px solid #f6b83d;
 }

@@ -3,7 +3,7 @@ import PetBlock from '../../components/PetBlock/PetBlock';
 import Title from '../../components/Title/Title';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import Header from "../../components/Header/Header";
-import s from './LoginPage.module.css'
+import s from './LoginPage.module.css';
 
 const LoginPage: React.FC = () => {
   return (

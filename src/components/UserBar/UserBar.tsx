@@ -28,7 +28,7 @@ const UserBar: React.FC<UserBarProps> = ({ name, avatar }) => {
             aria-hidden="true"
             focusable="false"
           >
-            <use xlinkHref={`${SPRITE_PATH}#icon-user`} />
+            <use href={`${SPRITE_PATH}#icon-user`} />
           </svg>
         )}
       </div>

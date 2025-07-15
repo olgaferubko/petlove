@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import s from './Nav.module.css';
 
 interface NavProps {
@@ -6,29 +6,36 @@ interface NavProps {
 }
 
 const links = [
-  { to: '/news', label: 'News'},
-  { to: '/notices', label: 'Notices'},
-  { to: '/friends', label: 'Our friends'},
+  { to: '/news', label: 'News' },
+  { to: '/notices', label: 'Notices' },
+  { to: '/friends', label: 'Our friends' },
 ];
 
-const Nav: React.FC<NavProps> = ({ onLinkClick }) => (
-  <nav className={s.nav} aria-label="Main navigation">
-    <ul className={s.list}>
-      {links.map(({ to, label }) => (
-        <li key={to} className={s.item}>
-          <NavLink
-            to={to}
-            className={({ isActive }) =>
-              isActive ? `${s.link} ${s.active}` : s.link
-            }
-            onClick={onLinkClick}
-          >
-            {label}
-          </NavLink>
-        </li>
-      ))}
-    </ul>
-  </nav>
-);
+const Nav: React.FC<NavProps> = ({ onLinkClick }) => {
+  const location = useLocation();
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
+  return (
+    <nav aria-label="Main navigation">
+      <ul className={s.list}>
+        {links.map(({ to, label }) => (
+          <li key={to} className={isAuthPage ? s.itemAuth : s.item}> 
+            <NavLink
+              to={to}
+              className={({ isActive }) =>
+                isActive
+                  ? `${s.link} ${isAuthPage ? s.activeAuth : s.active}`
+                  : s.link
+              }
+              onClick={onLinkClick}
+            >
+              {label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 export default Nav;

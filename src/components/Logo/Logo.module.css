@@ -4,9 +4,15 @@
     font-size: 20px;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: var(--color-main-text);
+    color: #262626;
+    display: flex;
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: end;
 }
 
 .heartIcon {
-    fill: var(--color-orange);
+    fill: #f6b83d;
 }

@@ -56,18 +56,19 @@ const LoginForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={s.form} noValidate>
       <div className={s.wrapper}>
 
-        <label className={s.field}>
+        <label
+          className={`${s.field} ${watchedEmail && errors.email ? s.invalid : ''}`}
+        >
           <input
             type="email"
             placeholder="Email"
             {...register('email')}
-            className={`${s.input} ${errors.email ? s.invalid : ''}`}
+            className={s.input}
             disabled={isLoading}
           />
-
           {watchedEmail && errors.email && (
             <svg className={s.iconError} width={18} height={18} aria-hidden="true">
-              <use href={`${ICONS_SPRITE}#icon-cross`} />
+              <use href={`${ICONS_SPRITE}#icon-x`} />
             </svg>
           )}
         </label>
@@ -75,12 +76,16 @@ const LoginForm: React.FC = () => {
           <p className={s.error}>{errors.email.message}</p>
         )}
 
-        <label className={s.field}>
+        <label
+          className={`${s.field} ${
+            errors.password ? s.invalid : watchedPassword ? s.valid : ''
+          }`}
+        >
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
             {...register('password')}
-            className={`${s.input} ${errors.password ? s.invalid : ''}`}
+            className={s.input}
             disabled={isLoading}
           />
           <div className={s.iconWrapper}>
@@ -101,7 +106,6 @@ const LoginForm: React.FC = () => {
               </svg>
             </button>
           </div>
-          
         </label>
         {errors.password ? (
           <p className={s.error}>{errors.password.message}</p>
