@@ -1,4 +1,6 @@
-.picture {
-    display: flex;
-    justify-content: center;
+.petBlockImage {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
 }

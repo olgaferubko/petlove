@@ -99,10 +99,7 @@ export const fetchCurrentUser = createAsyncThunk<
       );
       return data;
     } catch (err: any) {
-      const msg =
-        err.response?.data?.error?.message ||
-        err.response?.data?.message ||
-        err.message;
+      const msg = err.response?.data?.message || err.message;
       return rejectWithValue(msg);
     }
   }

@@ -10,7 +10,7 @@ const RestrictedRoute = ({ component: Component }: RestrictedRouteProps): ReactE
   const location = useLocation();
   const { isLoggedIn } = useAuth();
 
-  return isLoggedIn ? <Navigate to={location?.state || '/'} /> : Component;
+  return isLoggedIn ? <Navigate to={location?.state || '/profile'} /> : Component;
 };
 
 export default RestrictedRoute;

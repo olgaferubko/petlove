@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import AuthNav from '../AuthNav/AuthNav';

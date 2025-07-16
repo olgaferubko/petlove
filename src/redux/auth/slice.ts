@@ -91,7 +91,7 @@ const authSlice = createSlice({
       (state, action: PayloadAction<CurrentUserResponse>) => {
         state.isRefreshing = false;
         state.user = action.payload;
-        state.isLoggedIn = Boolean(action.payload);
+        state.isLoggedIn = true;
       }
     );
     builder.addCase(fetchCurrentUser.rejected, (state, action) => {

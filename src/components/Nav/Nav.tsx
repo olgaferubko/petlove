@@ -19,19 +19,27 @@ const Nav: React.FC<NavProps> = ({ onLinkClick }) => {
     <nav aria-label="Main navigation">
       <ul className={s.list}>
         {links.map(({ to, label }) => (
-          <li key={to} className={isAuthPage ? s.itemAuth : s.item}> 
-            <NavLink
-              to={to}
-              className={({ isActive }) =>
-                isActive
-                  ? `${s.link} ${isAuthPage ? s.activeAuth : s.active}`
-                  : s.link
-              }
-              onClick={onLinkClick}
-            >
-              {label}
-            </NavLink>
-          </li>
+          <NavLink
+            key={to}
+            to={to}
+            end
+          >
+            {({ isActive }) => (
+              <li
+                className={
+                  isActive
+                    ? `${isAuthPage ? s.itemAuth : s.item} ${isAuthPage ? s.activeAuth : s.active}`
+                    : isAuthPage
+                    ? s.itemAuth
+                    : s.item
+                }
+              >
+                <span className={s.link} onClick={onLinkClick}>
+                  {label}
+                </span>
+              </li>
+            )}
+          </NavLink>
         ))}
       </ul>
     </nav>

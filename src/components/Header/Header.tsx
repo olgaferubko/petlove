@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import UserBar from '../UserBar/UserBar';
@@ -8,12 +9,13 @@ import s from './Header.module.css';
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { isLoggedIn, user } = useAuth();
-console.log('isLoggedIn:', isLoggedIn);
-console.log('user:', user);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/home';
+  
   return (
     <header className={s.header}>
       <Logo />
-      <div>
+      <div className={s.wrapper}>
       {isLoggedIn && user ? (
         <UserBar name={user.name} avatar={user.avatar} />
       ) : null}
@@ -22,7 +24,7 @@ console.log('user:', user);
         onClick={() => setMenuOpen(true)}
         aria-label="Open menu"
       >
-        <svg className={s.iconBurger} width={32} height={32} aria-hidden="true">
+        <svg className={`${s.iconBurger} ${isHomePage ? s.iconBurgerHome : ''}`} width={32} height={32} aria-hidden="true">
           <use href="/icons.svg#icon-menu" />
         </svg>
       </button>

@@ -1,4 +1,3 @@
-import React from 'react';
 import LoginBtn from '../LoginBtn/LoginBtn';
 import RegisterBtn from '../RegisterBtn/RegisterBtn';
 import s from './AuthNav.module.css';

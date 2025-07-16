@@ -8,6 +8,10 @@
     display: flex;
 }
 
+.logoHome {
+    color: #fff;
+}
+
 .iconWrapper {
     display: flex;
     align-items: end;
@@ -15,4 +19,8 @@
 
 .heartIcon {
     fill: #f6b83d;
+}
+
+.heartIconHome {
+    fill: #fff;
 }

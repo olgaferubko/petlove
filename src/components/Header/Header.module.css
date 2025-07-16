@@ -2,15 +2,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
+.wrapper {
+    display: flex;
+    gap: 12px;
+}
 
 .burger {
     background: transparent;
     outline: none;
+    display: flex;
+    align-items: center;
 }
 
 .iconBurger {
     stroke: #262626;
+}
+
+.iconBurgerHome {
+    stroke: #fff;
 }

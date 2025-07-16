@@ -3,31 +3,57 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from './redux/auth/hooks';
 import { fetchCurrentUser } from './redux/auth/operations';
-import { selectToken } from './redux/auth/selectors';
+import { selectToken, selectIsRefreshing } from './redux/auth/selectors';
+import PrivateRoute from './components/Routes/PrivateRoute'
+import RestrictedRoute from './components/Routes/RestrictedRoute';
 
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'));
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const token = useSelector(selectToken);
+  const isRefreshing = useSelector(selectIsRefreshing);
 
-  useEffect(() => {
-    if (token) {
-      dispatch(fetchCurrentUser());
-    }
-  }, [dispatch, token]);
+    useEffect(() => {
+      if (token) {
+        dispatch(fetchCurrentUser());
+      }
+    }, [dispatch, token]);
 
+  if (isRefreshing) {
+    return <div>Loading user...</div>;
+  }
+  
+  
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute component={<RegisterPage />} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute component={<ProfilePage />} />
+          }
+        />
         <Route path="/home" element={<HomePage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );

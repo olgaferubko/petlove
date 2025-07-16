@@ -31,7 +31,7 @@ const PetBlock: React.FC<PetBlockProps> = ({
 
   return (
     <section>
-      <picture className={s.picture}>
+      <picture>
         <source
           media="(min-width:1280px)"
           srcSet={desktopSrcSet}
