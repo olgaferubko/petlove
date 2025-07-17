@@ -15,6 +15,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .code {
@@ -59,6 +60,10 @@
 }
 
 @media (min-width: 768px) {
+    .wrapper {
+        margin-top: 32px;
+    }
+    
     .code {
         font-weight: 800;
         font-size: 300px;

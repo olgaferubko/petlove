@@ -9,6 +9,14 @@
     gap: 12px;
 }
 
+.userNavDesktop {
+    display: none;
+}
+
+.userBarMobile {
+    display: flex;
+}
+
 .burger {
     background: transparent;
     outline: none;
@@ -22,4 +30,16 @@
 
 .iconBurgerHome {
     stroke: #fff;
+}
+
+@media (min-width: 768px) {
+    .userNavDesktop {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .userBarMobile {
+        display: none;
+    }
 }

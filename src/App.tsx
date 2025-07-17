@@ -11,6 +11,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'));
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
+const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 const App: React.FC = () => {
@@ -25,7 +26,7 @@ const App: React.FC = () => {
     }, [dispatch, token]);
 
   if (isRefreshing) {
-    return <div>Loading user...</div>;
+    return <div>Loading...</div>;
   }
   
   
@@ -51,6 +52,7 @@ const App: React.FC = () => {
           }
         />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/news" element={<NewsPage />} />
 
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="*" element={<NotFoundPage />} />

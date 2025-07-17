@@ -1,0 +1,45 @@
+.inputWrapper {
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    border-radius: 30px;
+    padding: 12px;
+    display: flex;
+    gap: 4px;
+    margin-top: 20px;
+}
+
+.input {
+    border: none;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+    padding: 0;
+    width: 100%;
+    background: transparent;
+    outline: none;
+}
+
+
+.btnWrapper {
+    display: flex;
+    gap: 4px;
+}
+
+.clearBtn {
+    background: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.searchBtn {
+    background: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.iconSearch {
+    stroke: #262626;
+    fill: none;
+}
