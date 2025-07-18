@@ -67,8 +67,6 @@ const SearchField: React.FC<SearchFieldProps> = ({
                 >
                     <svg 
                     className={s.iconSearch}
-                    width={18}
-                    height={18}
                     >
                     <use href="/icons.svg#icon-search" />
                     </svg>

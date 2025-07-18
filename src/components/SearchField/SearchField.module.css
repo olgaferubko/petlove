@@ -31,15 +31,21 @@
     background: transparent;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .searchBtn {
     background: transparent;
     display: flex;
     align-items: center;
+    justify-content: center;
+
 }
 
 .iconSearch {
-    stroke: #262626;
     fill: none;
+    stroke: #262626;
+    width: 18px;
+    height: 18px;
+    display: block;
 }

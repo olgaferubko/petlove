@@ -16,9 +16,22 @@ interface NewsListProps {
   keyword: string;
   currentPage: number;
   pageSize: number;
+  onTotalChange: (totalPages: number) => void;
 }
 
-const NewsList: React.FC<NewsListProps> = ({ keyword, currentPage, pageSize }) => {
+interface NewsResponse {
+  page: number;
+  perPage: number;
+  totalPages: number;
+  results: News[];
+}
+
+const NewsList: React.FC<NewsListProps> = ({
+  keyword,
+  currentPage,
+  pageSize,
+  onTotalChange,
+}) => {
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -26,43 +39,34 @@ const NewsList: React.FC<NewsListProps> = ({ keyword, currentPage, pageSize }) =
     const fetchNews = async () => {
       setLoading(true);
       try {
-        const response = await axios.get<{ results: News[]; total: number }>(
-          '/news',
-          {
-            params: {
-              keyword,
-              page: currentPage,
-              limit: pageSize,
-            },
-          }
-        );
-        setNews(response.data.results);
-      } catch {
-        // додати toast
+        const { data } = await axios.get<NewsResponse>('/news', {
+          params: { keyword, page: currentPage, limit: pageSize },
+        });
+        setNews(data.results);
+        onTotalChange(data.totalPages);
+      } catch (err) {
+        console.error(err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchNews();
-  }, [keyword, currentPage, pageSize]);
+  }, [keyword, currentPage, pageSize, onTotalChange]);
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <ul className={s.newsList}>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        news.map((item) => (
-          <NewsItem
-            key={item._id}
-            title={item.title}
-            description={item.text}
-            date={item.date}
-            image={item.imgUrl}
-            url={item.url}
-          />
-        ))
-      )}
+      {news.map(item => (
+        <NewsItem
+          key={item._id}
+          title={item.title}
+          description={item.text}
+          date={item.date}
+          image={item.imgUrl}
+          url={item.url}
+        />
+      ))}
     </ul>
   );
 };
