@@ -22,7 +22,6 @@ const NewsPage: React.FC = () => {
       <Header />
       <Title text="News" />
       <SearchField onSearch={handleSearch} placeholder="Search" />
-
       <NewsList
         keyword={searchQuery}
         currentPage={currentPage}

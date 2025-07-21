@@ -47,9 +47,9 @@
     border-radius: 100%;
     background: transparent;
     font-family: "Manrope", sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.28571;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
     color: #262626;
     border: 1px solid rgba(38, 38, 38, 0.05);
     width: 40px;
@@ -93,4 +93,39 @@
 
 .disabledIcon {
     fill: rgba(38, 38, 38, 0.5);
+}
+
+@media (min-width: 768px) {
+    .pagination {
+        gap: 24px;
+        margin-top: 60px;
+    }
+
+    .btnWrapper {
+        gap: 8px;
+    }
+
+    .arrowBtn {
+    height: 44px;
+    width: 44px;
+    }
+
+    .dots {
+        font-size: 20px;
+        line-height: 1.1;
+        width: 44px;
+        height: 44px;
+    }
+
+    .pageBtn {
+        font-size: 18px;
+        line-height: 1.22222;
+        width: 44px;
+        height: 44px;
+    }
+
+    .active {
+        font-size: 18px;
+        line-height: 1.22222;
+    }
 }
