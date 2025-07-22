@@ -3,5 +3,9 @@
     flex-direction: column;
     gap: 8px;
     align-items: center;
-    margin-top: 50px;
+}
+
+.authNavModal {
+    display: flex;
+    gap: 8px;
 }

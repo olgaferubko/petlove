@@ -1,0 +1,188 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    min-width: 280px;
+    background: #fff;
+    border-radius: 16px;
+}
+
+.image {
+    object-fit: cover;
+    object-position: center center;
+    min-width: 232px;
+    border-radius: 16px;
+    display: block;
+    height: 178px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.titleWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #2b2b2a;
+}
+
+.popularity {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    color: #2b2b2a;
+}
+
+.infoList {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.infoItem {
+    display: flex;
+    flex-direction: column;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.16667;
+    letter-spacing: -0.02em;
+    color: #262626;
+}
+
+.decor {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.5);
+}
+
+
+.comment {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    color: #2b2b2a;
+}
+
+.priceWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.price {
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #2b2b2a;
+}
+
+.btnWrapper {
+    display: flex;
+    gap: 10px;
+}
+
+.learnMoreBtn {
+    background: #f6b83d;
+    border-radius: 30px;
+    text-align: center;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #fff;
+    width: 100%;
+    padding: 14px;
+}
+
+.heartBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff4df;
+    border-radius: 30px;
+    border: none;
+    width: 46px;
+    height: 46px;
+    padding: 14px;
+}
+
+.iconHeart {
+    fill: none;
+    stroke: #f6b83d;
+}
+
+.favorited {
+    fill: #f6b83d;
+}
+
+
+@media (min-width: 768px) {
+    .card {
+        width: 342px;
+    }
+
+    .image {
+        width: 294px;
+        height: 178px;
+    }
+
+    .content {
+        gap: 24px;
+    }
+
+    .title {
+        font-size: 18px;
+        line-height: 1.33333;
+    }
+
+    .popularity {
+        line-height: 1.42857;
+    }
+
+    .price {
+        font-size: 18px;
+        line-height: 1.33333;
+    }
+
+    .learnMoreBtn {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .heartBtn {
+        width: 48px;
+        height: 48px;
+        padding: 15px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .card {
+        width: 363px;
+    }
+
+    .image {
+        width: 315px;
+    }
+}
+

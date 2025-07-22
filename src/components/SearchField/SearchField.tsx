@@ -1,80 +1,79 @@
-import { useState } from 'react';
 import s from './SearchField.module.css';
 
 interface SearchFieldProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearch: (query: string) => void;
   placeholder?: string;
   className?: string;
 }
 
 const SearchField: React.FC<SearchFieldProps> = ({
+  value,
+  onChange,
   onSearch,
   placeholder = 'Search',
+  className = '',
 }) => {
-  const [inputValue, setInputValue] = useState('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (inputValue.trim()) {
-      onSearch(inputValue.trim());
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (value.trim()) {
+        onSearch(value.trim());
+      }
     }
   };
 
   const handleClear = () => {
-    setInputValue('');
+    onChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>);
     onSearch('');
   };
 
-  const handleSearchClick = () => {
-    if (inputValue.trim()) {
-      onSearch(inputValue.trim());
+  const handleClickSearch = () => {
+    if (value.trim()) {
+      onSearch(value.trim());
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <div className={s.inputWrapper}>
-            <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder={placeholder}
-                className={s.input}
-            />
-            <div className={s.btnWrapper}>
-                {inputValue && (
-                    
-                    <button
-                    type="button"
-                    onClick={handleClear}
-                    className={s.clearBtn}
-                    aria-label="Clear search"
-                    >
-                    <svg 
-                    className={s.iconClear}
-                    width={18}
-                    height={18}
-                    >
-                        <use href="/icons.svg#icon-x" />
-                    </svg>
-                    </button>
-                )}
-                <button
-                    type="submit"
-                    className={s.searchBtn}
-                    aria-label="Search"
-                    onClick={handleSearchClick}
-                >
-                    <svg 
-                    className={s.iconSearch}
-                    >
-                    <use href="/icons.svg#icon-search" />
-                    </svg>
-                    </button>
-            </div>
-            
+    <div className={`${s.form} ${className}`}>
+      <div className={s.inputWrapper}>
+        <input
+          type="text"
+          value={value}
+          onChange={onChange}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          className={s.input}
+          aria-label="Search input"
+        />
+        <div className={s.btnWrapper}>
+          {value && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className={s.clearBtn}
+              aria-label="Clear search"
+            >
+              <svg className={s.iconClear} width={18} height={18}>
+                <use href="/icons.svg#icon-x" />
+              </svg>
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={handleClickSearch}
+            className={s.searchBtn}
+            aria-label="Search"
+            disabled={!value.trim()}
+          >
+            <svg className={s.iconSearch}>
+              <use href="/icons.svg#icon-search" />
+            </svg>
+          </button>
         </div>
-    </form>
+      </div>
+    </div>
   );
 };
 

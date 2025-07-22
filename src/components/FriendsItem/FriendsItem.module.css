@@ -5,7 +5,7 @@
     padding: 40px 12px 40px 20px;
     border-radius: 15px;
     background: #fff;
-    width: 100%;
+    min-width: 280px;
 }
 
 .logo {

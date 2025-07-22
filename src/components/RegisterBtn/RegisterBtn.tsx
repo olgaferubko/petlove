@@ -3,10 +3,11 @@ import s from './RegisterBtn.module.css';
 
 interface RegisterBtnProps {
   onClick?: () => void;
+  isModal?: boolean;
 }
 
-const RegisterBtn: React.FC<RegisterBtnProps> = ({ onClick }) => (
-  <Link to="/register" className={s.registerBtn} onClick={onClick}>
+const RegisterBtn: React.FC<RegisterBtnProps> = ({ onClick, isModal }) => (
+  <Link to="/register" className={isModal ? s.modalBtn : s.defaultBtn} onClick={onClick}>
     Registration
   </Link>
 );

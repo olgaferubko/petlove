@@ -3,9 +3,10 @@ import s from './LoginBtn.module.css';
 
 interface LoginBtnProps {
   onClick?: () => void;
+  isModal?: boolean;
 }
 
-const LoginBtn: React.FC<LoginBtnProps> = ({ onClick }) => {
+const LoginBtn: React.FC<LoginBtnProps> = ({ onClick, isModal }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
@@ -15,11 +16,15 @@ const LoginBtn: React.FC<LoginBtnProps> = ({ onClick }) => {
     navigate('/login');
   };
 
-  const btnClassName = isAuthPage ? s.authPageStyle : s.defaultStyle;
+  const btnClassName = isModal
+  ? s.modalStyle
+  : isAuthPage
+  ? s.authPageStyle
+  : s.defaultStyle;
 
   return (
     <button onClick={handleClick} className={btnClassName}>
-      Login
+      Log In
     </button>
   );
 };

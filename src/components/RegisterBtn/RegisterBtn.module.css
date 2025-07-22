@@ -1,4 +1,4 @@
-.registerBtn {
+.defaultBtn {
     border-radius: 30px;
     text-align: center;
     width: 100%;
@@ -11,4 +11,24 @@
     text-transform: uppercase;
     color: #f6b83d;
     background: #fff4df;
+}
+
+.modalBtn {
+    background: #fff4df;
+    border-radius: 30px;
+    padding: 12px;
+    width: 115px;
+    text-align: center;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #f6b83d
+}
+
+@media (min-width: 375px) {
+    .modalBtn {
+        width: 135px;
+    }
 }

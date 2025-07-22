@@ -4,13 +4,15 @@ import s from './AuthNav.module.css';
 
 interface AuthNavProps {
   onLinkClick: () => void;
+  isModal?: boolean;
 }
 
-const AuthNav: React.FC<AuthNavProps> = ({ onLinkClick }) => {
+const AuthNav: React.FC<AuthNavProps> = ({ onLinkClick, isModal }) => {
+  const navClass = isModal ? s.authNavModal : s.authNav;
   return (
-    <nav className={s.authNav}>
-      <LoginBtn onClick={onLinkClick} />
-      <RegisterBtn onClick={onLinkClick} />
+    <nav className={navClass}>
+      <LoginBtn onClick={onLinkClick} isModal={isModal} />
+      <RegisterBtn onClick={onLinkClick} isModal={isModal} />
     </nav>
   );
 };

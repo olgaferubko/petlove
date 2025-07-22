@@ -12,6 +12,7 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'));
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage'));
+const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage'))
 const FriendsPage = lazy(() => import('./pages/FriendsPage/FriendsPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
@@ -54,6 +55,7 @@ const App: React.FC = () => {
         />
         <Route path="/home" element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/notices" element={<NoticesPage />} />
         <Route path="/friends" element={<FriendsPage />} />
 
         <Route path="/" element={<Navigate to="/home" replace />} />

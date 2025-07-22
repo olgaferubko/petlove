@@ -7,23 +7,31 @@ import Pagination from '../../components/Pagination/Pagination';
 import s from './NewsPage.module.css';
 
 const NewsPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchValue, setSearchValue] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const pageSize = 6;
 
-  const handleSearch = (value: string) => {
-    setSearchQuery(value);
+
+  const handleSearch = (query: string) => {
+    setSearchValue(query);
     setCurrentPage(1);
+
   };
 
   return (
     <main className={s.container}>
       <Header />
       <Title text="News" />
-      <SearchField onSearch={handleSearch} placeholder="Search" />
+      <SearchField
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+        onSearch={handleSearch}
+        placeholder="Search"
+      />
+
       <NewsList
-        keyword={searchQuery}
+        keyword={searchValue}
         currentPage={currentPage}
         pageSize={pageSize}
         onTotalChange={setTotalPages}

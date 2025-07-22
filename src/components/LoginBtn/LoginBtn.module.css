@@ -29,3 +29,23 @@
     color: #fff;
     background: #f6b83d;
 }
+
+.modalStyle {
+    width: 110px;
+    text-align: center;
+    border-radius: 30px;
+    padding: 12px;
+    background: #f6b83d;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #fff;
+}
+
+@media (min-width: 375px) {
+    .modalStyle {
+        width: 129px;
+    }
+}
