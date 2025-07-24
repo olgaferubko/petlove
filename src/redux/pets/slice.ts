@@ -9,6 +9,7 @@ const initialState: PetsState = {
   totalPages: 1,   
   isLoading: false,
   error: null,
+  favorites: [],
 };
 
 const petsSlice = createSlice({
