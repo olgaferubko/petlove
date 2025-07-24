@@ -18,6 +18,7 @@ const initialState = {
     totalPages: 1,
     isLoading: false,
     error: null,
+    favorites: [],
   },
 };
 
