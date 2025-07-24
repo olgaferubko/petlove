@@ -15,6 +15,7 @@ export interface Pet {
 
 export interface PetsState {
     items: Pet[];
+    favorites: string[];
     totalPages: number; 
     isLoading: boolean;
     error: string | null;

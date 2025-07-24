@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ModalAttention from '../ModalAttention/ModalAttention';
+import ModalNotice from '../ModalNotice/ModalNotice';
 import useAuth from '../../hooks/useAuth';
 import { toggleFavorite } from '../../redux/pets/slice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
 import s from './NoticesItem.module.css';
 
 interface NoticesItemProps {
@@ -37,7 +40,9 @@ const formatDate = (dateStr: string) => {
 const NoticesItem: React.FC<NoticesItemProps> = ({ notice }) => {
   const { isLoggedIn } = useAuth();
   const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.auth.user);
   const [showAttentionModal, setShowAttentionModal] = useState(false);
+  const [showNoticeModal, setShowNoticeModal] = useState(false);
 
   const {
     imgURL,
@@ -66,7 +71,7 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ notice }) => {
     setShowAttentionModal(true);
     return;
   }
-  console.log('Open Learn More modal');
+  setShowNoticeModal(true);
 };
 
   return (
@@ -117,6 +122,14 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ notice }) => {
       </li>
 
       {showAttentionModal && <ModalAttention onClose={() => setShowAttentionModal(false)} />}
+      {showNoticeModal && (
+        <ModalNotice
+          notice={notice}
+          onClose={() => setShowNoticeModal(false)}
+          user={user}
+          onToggleFavorite={handleToggleFavorite}
+        />
+      )}
     </>
   );
 };
