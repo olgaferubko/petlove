@@ -14,6 +14,7 @@ const HomePage = lazy(() => import('./pages/HomePage/HomePage'));
 const NewsPage = lazy(() => import('./pages/NewsPage/NewsPage'));
 const NoticesPage = lazy(() => import('./pages/NoticesPage/NoticesPage'))
 const FriendsPage = lazy(() => import('./pages/FriendsPage/FriendsPage'))
+const AddPage = lazy(() => import('./pages/AddPage/AddPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 const App: React.FC = () => {
@@ -51,6 +52,12 @@ const App: React.FC = () => {
           path="/profile"
           element={
             <PrivateRoute component={<ProfilePage />} />
+          }
+        />
+        <Route
+          path="/add-pet"
+          element={
+            <PrivateRoute component={<AddPage />} />
           }
         />
         <Route path="/home" element={<HomePage />} />

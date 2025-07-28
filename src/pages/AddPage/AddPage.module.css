@@ -1,0 +1,13 @@
+.container {
+    padding: 24px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    background: #f9f9f9;
+    min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 32px;
+    }
+}

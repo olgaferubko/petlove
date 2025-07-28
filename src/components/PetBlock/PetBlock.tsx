@@ -30,7 +30,7 @@ const PetBlock: React.FC<PetBlockProps> = ({
     : `${mobile1x} 1x`;
 
   return (
-    <section>
+    <section className={s.petBlockWrapper}>
       <picture>
         <source
           media="(min-width:1280px)"

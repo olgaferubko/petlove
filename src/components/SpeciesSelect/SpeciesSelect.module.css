@@ -1,0 +1,88 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.inputWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    border-radius: 30px;
+    padding: 12px;
+    background: transparent;
+}
+
+.value {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: rgba(38, 38, 38, 0.5);
+}
+
+.selected {
+    color: #262626;
+}
+
+.icon {
+    stroke: #262626;
+    fill: none;
+    transition: transform 0.2s;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid rgba(38, 38, 38, 0.15);
+    border-radius: 15px;
+    margin-top: 4px;
+    z-index: 10;
+    overflow: hidden;
+    padding: 12px 6px 12px 12px;
+}
+
+.scrollContainer {
+    max-height: 78px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background: rgba(38, 38, 38, 0.08);
+    border-radius: 10px;
+}
+
+.option {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: rgba(38, 38, 38, 0.6);
+}
+
+.option:hover {
+    background-color: #f5f5f5;
+}
+
+.active {
+    color: #262626;
+}
+
+.selectedBorder {
+    border: 1px solid #f6b83d;
+}
