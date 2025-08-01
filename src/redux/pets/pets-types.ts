@@ -19,4 +19,5 @@ export interface PetsState {
   totalPages: number;
   isLoading: boolean;
   error: string | null;
+   favorites: string[];
 }
