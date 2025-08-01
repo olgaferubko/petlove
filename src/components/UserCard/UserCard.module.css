@@ -1,0 +1,38 @@
+.wrapper {
+    padding: 18px 20px 40px;
+    background: #fff;
+    border-radius: 30px;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.badge {
+    border-radius: 30px;
+    padding: 10px 14px;
+    background: #f6b83d;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
+
+.iconUser {
+    stroke: #fff;
+    fill: #fff;
+}
+
+.logout {
+    width: 114px;
+    margin-top: 20px;
+}

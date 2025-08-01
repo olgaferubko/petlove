@@ -1,0 +1,17 @@
+.editBtn {
+    border-radius: 30px;
+    padding: 10px;
+    background: #fff4df;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconEdit {
+    stroke: #f6b83d;
+    fill: none;
+}
+
+.editBtn:hover {
+    background: #fbe7c1;
+}

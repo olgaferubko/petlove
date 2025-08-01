@@ -2,10 +2,13 @@ import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
 import toast from 'react-hot-toast';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { addPetSchema } from '../../validations/addPetSchema';
+import { addUserPet } from '../../redux/pets/operations';
 import s from './AddPetForm.module.css';
 
 import SpeciesSelect from '../SpeciesSelect/SpeciesSelect';
@@ -26,7 +29,7 @@ const AddPetForm = () => {
   } = useForm({
     resolver: yupResolver(addPetSchema),
     defaultValues: {
-      imgUrl: '',
+      imgURL: '',
       title: '',
       name: '',
       birthday: '',
@@ -35,25 +38,38 @@ const AddPetForm = () => {
     },
   });
 
+const dispatch = useDispatch<AppDispatch>();
+
 const onSubmit = async (data: any) => {
   try {
-    const res = await fetch('/api/users/current/pets/add', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
+    const normalizedBirthday = typeof data.birthday === 'string'
+      ? formatBirthday(data.birthday)
+      : new Date(data.birthday).toISOString().split('T')[0];
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || 'Failed to add pet');
+    const normalizedData = {
+      ...data,
+      species: data.species.toLowerCase(),
+      birthday: normalizedBirthday,
+    };
+
+const result = await dispatch(addUserPet(normalizedData)).unwrap();
+if (result && result._id) {
+  toast.success('Pet added successfully!');
+  navigate('/profile');
+    } else {
+      throw new Error('Invalid response from server');
     }
-
-    toast.success('Pet added successfully!');
-    navigate('/profile');
   } catch (err: any) {
-    toast.error(err.message);
+    console.log('ADD PET ERROR:', err);
+    toast.error(typeof err === 'string' ? err : err?.message || 'Unexpected error');
   }
 };
+
+const formatBirthday = (input: string): string => {
+  const [day, month, year] = input.split('.');
+  return `${year}-${month}-${day}`;
+  };
+  
 
   const handleBack = () => {
     navigate('/profile');
@@ -75,7 +91,7 @@ const onSubmit = async (data: any) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       if (typeof reader.result === 'string') {
-        setValue('imgUrl', reader.result, { shouldValidate: true });
+        setValue('imgURL', reader.result, { shouldValidate: true });
       }
     };
     reader.readAsDataURL(file);
@@ -121,8 +137,8 @@ const onSubmit = async (data: any) => {
       {errors.sex && <p className={s.error}>{errors.sex.message}</p>}
 
         <div className={s.imagePreview}>
-          {watch('imgUrl') ? (
-            <img src={watch('imgUrl')} alt="Pet preview" className={s.previewImage} />
+          {watch('imgURL') ? (
+            <img src={watch('imgURL')} alt="Pet preview" className={s.previewImage} />
           ) : (
             <svg className={s.footprint}  width={34} height={34}>
               <use href="/icons.svg#icon-footprint" />
@@ -131,22 +147,15 @@ const onSubmit = async (data: any) => {
         </div>
 
         <div className={s.inputGroup}>
-          <input {...register('imgUrl')} placeholder="Enter URL" className={`${s.input} ${watch('imgUrl') ? s.filled : ''}`} />
-          <button type="button" className={s.uploadButton} onClick={handleUploadClick}>
-                Upload photo
-                <svg className={s.iconUpload} width={20} height={20}>
-                    <use href="/icons.svg#icon-upload" />
-                </svg>
-          </button>
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleFileChange}
-            style={{ display: 'none' }}
-          />
+          <input {...register('imgURL')} placeholder="Enter URL" className={`${s.input} ${watch('imgURL') ? s.filled : ''}`} />
+          <div className={s.uploadButton}>
+            Upload photo
+            <svg className={s.iconUpload} width={20} height={20}>
+              <use href="/icons.svg#icon-upload" />
+            </svg>
+          </div>
         </div>
-        {errors.imgUrl && <p className={s.error}>{errors.imgUrl.message}</p>}
+        {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
 
       <input className={`${s.titleNotice} ${watch('title') ? s.filled : ''}`} {...register('title')} placeholder="Title" />
       {errors.title && <p className={s.error}>{errors.title.message}</p>}

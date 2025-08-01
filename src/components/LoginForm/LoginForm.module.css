@@ -111,3 +111,7 @@ input:-webkit-autofill {
     margin-bottom: 12px;
     margin-top: 40px;
 }
+
+.submitBtn:hover {
+    background: #f9b020;
+}

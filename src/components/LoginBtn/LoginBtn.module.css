@@ -14,6 +14,11 @@
     background: transparent;
 }
 
+.authPageStyle:hover {
+    background: #fff4df;
+    color: #f6b83d;
+}
+
 .defaultStyle {
     width: 100%;
     padding: 12px;
@@ -29,6 +34,10 @@
     color: #fff;
     background: #f6b83d;
 }
+.defaultStyle:hover {
+    background: #f9b020;
+}
+
 
 .modalStyle {
     width: 110px;
@@ -42,6 +51,10 @@
     line-height: 1.28571;
     letter-spacing: -0.03em;
     color: #fff;
+}
+
+.modalStyle:hover {
+    background: #f9b020;
 }
 
 @media (min-width: 375px) {

@@ -1,7 +1,13 @@
+import { Pet } from '../pets/pets-types';
+
 export interface User {
+  _id: string;
   name: string;
   email: string;
   avatar?: string | null;
+  phone?: string | null;
+  noticesFavorites: string[];
+  noticesViewed?: string[];
 }
 
 export interface LoginCredentials {
@@ -18,7 +24,13 @@ export interface AuthResponse {
   token: string;
 }
 
-export type CurrentUserResponse = User;
+export interface CurrentUserResponse {
+  _id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  noticesFavorites: string[];
+}
 
 export interface AuthState {
   user: User | null;

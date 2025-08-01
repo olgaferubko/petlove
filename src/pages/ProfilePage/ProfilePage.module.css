@@ -1,7 +1,7 @@
 .container {
-    padding: 20px;
-    padding-top: 28px;
+    padding: 28px 20px 56px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    background: #f9f9f9;
+    min-height: 100vh;
 }

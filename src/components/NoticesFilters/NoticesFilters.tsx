@@ -77,7 +77,7 @@ const NoticesFilters: React.FC<NoticesFiltersProps> = ({ onFilterChange }) => {
   const handleReset = () => setFilters(defaultFilters);
 
   return (
-    <form className={s.form}>
+    <div className={s.form}>
       <SearchField
         value={filters.search}
         onChange={(e) => handleInputChange('search', e.target.value)}
@@ -172,7 +172,7 @@ const NoticesFilters: React.FC<NoticesFiltersProps> = ({ onFilterChange }) => {
       <button type="button" onClick={handleReset} className={s.resetBtn}>
         Reset
       </button>
-    </form>
+    </div>
   );
 };
 

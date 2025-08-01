@@ -1,51 +1,68 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { PetsState, Pet } from './pets-types';
-import { saveFavoritesToLocalStorage, getFavoritesFromLocalStorage } from '../../utils/localStorage';
-
-import { fetchPets } from './operations';
+import { createSlice } from '@reduxjs/toolkit';
+import { Pet, PetsState } from './pets-types';
+import {
+  fetchPets,
+  getUserPets,
+  deleteUserPet,
+  addUserPet,
+} from './operations';
 
 const initialState: PetsState = {
   items: [],
-  totalPages: 1,   
+  totalPages: 0,
   isLoading: false,
   error: null,
-  favorites: [],
 };
 
 const petsSlice = createSlice({
   name: 'pets',
   initialState,
-  reducers: {
-    toggleFavorite: (state, action: PayloadAction<string>) => {
-      const petId = action.payload;
-      const pet = state.items.find(p => p._id === petId);
-      if (pet) {
-        pet.isFavorite = !pet.isFavorite;
-        saveFavoritesToLocalStorage(state.items);
-      }
-    },
-  },
-  extraReducers: (builder) => {
+  reducers: {},
+
+  extraReducers: builder => {
     builder
-      .addCase(fetchPets.pending, (state) => {
+
+      .addCase(fetchPets.pending, state => {
         state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchPets.fulfilled, (state, action) => {
-        const favoriteIds = getFavoritesFromLocalStorage();
-        state.items = action.payload.results.map(pet => ({
-          ...pet,
-          isFavorite: favoriteIds.includes(pet._id),
-        }));
-        state.totalPages = action.payload.totalPages;
         state.isLoading = false;
+        state.items = action.payload.results;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchPets.rejected, (state, action) => {
-        state.error = action.error.message ?? 'Error fetching pets';
         state.isLoading = false;
+        state.error = action.error.message ?? 'Failed to fetch pets';
+      })
+
+      .addCase(addUserPet.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addUserPet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items.push(action.payload);
+      })
+      .addCase(addUserPet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || 'Failed to add pet';
+      })
+
+      .addCase(deleteUserPet.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteUserPet.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const id = action.payload;
+        state.items = state.items.filter(pet => pet._id !== id);
+      })
+      .addCase(deleteUserPet.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload || 'Failed to delete pet';
       });
   },
 });
 
-export const { toggleFavorite } = petsSlice.actions;
 export default petsSlice.reducer;

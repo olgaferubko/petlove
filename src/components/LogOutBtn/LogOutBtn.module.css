@@ -1,6 +1,7 @@
 .logoutBtn {
     border-radius: 30px;
-    padding: 12px 60px;
+    padding: 12px;
+    width: 100%;
     background: #fff4df;
     color: #f6b83d;
     font-family: "Manrope", sans-serif;
@@ -10,4 +11,8 @@
     letter-spacing: -0.03em;
     text-transform: uppercase;
     text-align: center;
+}
+
+.logoutBtn:hover {
+    background: #fbe7c1;
 }

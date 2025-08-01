@@ -32,9 +32,10 @@ const UserNav: React.FC = () => {
   if (!isLoggedIn || !user) return null;
 
   return (
-      <div className={s.userNav}>
-        <LogOutBtn onClick={openModal} />
-        <UserBar name={user.name} avatar={user.avatar} />
+    <div className={s.userNav}>
+      
+        <div className={s.loginWrapper}><LogOutBtn onClick={openModal} /></div>
+        <UserBar />
       
 
         {isModalOpen && (

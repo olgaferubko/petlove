@@ -38,11 +38,18 @@
 }
 
 .popularity {
+    display: flex;
+    align-items: center;
+    gap: 4px;
     font-family: "Manrope", sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.28571;
     color: #2b2b2a;
+}
+
+.iconStar {
+    fill: #ffc531;
 }
 
 .infoList {
@@ -97,6 +104,7 @@
 
 .btnWrapper {
     display: flex;
+    align-items: center;
     gap: 10px;
 }
 
@@ -112,6 +120,10 @@
     color: #fff;
     width: 100%;
     padding: 14px;
+}
+
+.learnMoreBtn:hover {
+    background: #f9b020;
 }
 
 .heartBtn {
@@ -133,6 +145,26 @@
 
 .favorited {
     fill: #f6b83d;
+}
+
+.trashBtn {
+    border-radius: 30px;
+    width: 44px;
+    height: 44px;
+    padding: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff4df;
+}
+
+.trashBtn:hover {
+    background: #fbe7c1;
+}
+
+.iconTrash {
+    fill: none;
+    stroke: #f6b83d;
 }
 
 

@@ -1,0 +1,65 @@
+.myNotices {
+    margin-top: 40px;
+}
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    border-radius: 30px;
+    padding: 12px;
+    width: 123px;
+    text-align: center;
+    background: #fff;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+}
+
+.active {
+    border-radius: 30px;
+    padding: 12px;
+    width: 123px;
+    text-align: center;
+    font-family: "Manrope", sans-serif;
+    background: #f6b83d;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #fff;
+}
+
+.empty {
+    margin-top: 60px; 
+}
+
+.favorites {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #262626;
+}
+
+.highlight {
+    font-weight: 700;
+    color: #f6b83d;
+}
+
+.viewed {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: #262626;
+}

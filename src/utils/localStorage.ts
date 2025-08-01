@@ -1,8 +1,6 @@
-import { Pet } from '../redux/pets/pets-types';
 
-export const saveFavoritesToLocalStorage = (pets: Pet[]) => {
-  const favorites = pets.filter(pet => pet.isFavorite).map(pet => pet._id);
-  localStorage.setItem('favoritePets', JSON.stringify(favorites));
+export const saveFavoritesToLocalStorage = (favoriteIds: string[]) => {
+  localStorage.setItem('favoritePets', JSON.stringify(favoriteIds));
 };
 
 export const getFavoritesFromLocalStorage = (): string[] => {
