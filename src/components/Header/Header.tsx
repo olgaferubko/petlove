@@ -22,7 +22,7 @@ const Header: React.FC = () => {
 
         {isLoggedIn && user && (
           <div className={s.userBarMobile}>
-            <UserBar name={user.name} avatar={user.avatar} />
+            <UserBar />
           </div>
         )}
 
