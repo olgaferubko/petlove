@@ -19,17 +19,22 @@ export const MyNotices = () => {
   const [activeTab, setActiveTab] = useState<TabValue>('favorites');
 
   const allPets = useSelector((state: RootState) => state.pets.items, shallowEqual);
-  const favoritesIds = useSelector((state: RootState) => state.auth.user?.noticesFavorites || [], shallowEqual);
-  const viewedIds = useSelector((state: RootState) => state.auth.user?.noticesViewed || [], shallowEqual);
+const favoritesIds = useSelector(
+  (state: RootState) => state.auth.user?.noticesFavorites || []
+);
+
+const viewed = useSelector(
+  (state: RootState) => state.auth.user?.noticesViewed || []
+);
 
   const handleDeleteFavorite = (id: string) => {
     dispatch(deleteFavoriteFromBackend(id));
   };
 
-  const list = useMemo(() => {
-    const ids = activeTab === 'favorites' ? favoritesIds : viewedIds;
-    return allPets.filter(pet => ids.includes(pet._id));
-  }, [activeTab, favoritesIds, viewedIds, allPets]);
+const list: Pet[] = useMemo(() => {
+  const ids = activeTab === 'favorites' ? favoritesIds : viewed;
+  return allPets.filter(pet => ids.includes(pet._id));
+}, [activeTab, favoritesIds, viewed, allPets]);
 
   return (
     <div className={s.myNotices}>

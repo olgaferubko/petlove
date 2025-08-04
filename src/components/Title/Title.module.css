@@ -11,7 +11,6 @@
     line-height: 1;
     letter-spacing: -0.04em;
     color: #262626;
-    margin-top: 54px;
 }
 
 .subtitle {
@@ -21,4 +20,19 @@
     line-height: 1.28571;
     letter-spacing: -0.02em;
     color: #262626;
+}
+
+@media (min-width: 768px) {
+    .container {
+        gap: 16px;
+    }
+
+    .title {
+        font-size: 54px;
+    }
+
+    .subtitle {
+    font-size: 18px;
+    line-height: 1.22222;
+    }
 }

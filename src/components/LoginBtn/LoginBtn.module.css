@@ -2,7 +2,7 @@
     width: 100%;
     padding: 12px;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid #fff;
     border-radius: 30px;
     font-weight: 700;
     font-family: "Manrope", sans-serif;
@@ -11,7 +11,8 @@
     letter-spacing: -0.03em;
     text-transform: uppercase;
     color: #fff;
-    background: transparent;
+    background: #f6b83d;
+    
 }
 
 .authPageStyle:hover {
@@ -33,6 +34,7 @@
     text-transform: uppercase;
     color: #fff;
     background: #f6b83d;
+    border: 1px solid #fff;
 }
 .defaultStyle:hover {
     background: #f9b020;
@@ -60,5 +62,19 @@
 @media (min-width: 375px) {
     .modalStyle {
         width: 129px;
+    }
+}
+
+@media (min-width: 768px) {
+    .authPageStyle {
+        padding: 15px 35px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .defaultStyle {
+        padding: 15px 35px;
+        font-size: 16px;
+        line-height: 1.25;
     }
 }

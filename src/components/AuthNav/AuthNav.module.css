@@ -1,6 +1,6 @@
 .authNav {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 8px;
     align-items: center;
 }
@@ -8,4 +8,10 @@
 .authNavModal {
     display: flex;
     gap: 8px;
+}
+
+@media (min-width: 768px) {
+    .authNav {
+        flex-wrap: nowrap;
+    }
 }

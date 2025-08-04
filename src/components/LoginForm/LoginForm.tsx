@@ -67,7 +67,7 @@ const LoginForm: React.FC = () => {
             disabled={isLoading}
           />
           {watchedEmail && errors.email && (
-            <svg className={s.iconError} width={18} height={18} aria-hidden="true">
+            <svg className={s.iconError} aria-hidden="true">
               <use href={`${ICONS_SPRITE}#icon-x`} />
             </svg>
           )}
@@ -90,7 +90,7 @@ const LoginForm: React.FC = () => {
           />
           <div className={s.iconWrapper}>
             {watchedPassword && !errors.password && (
-              <svg className={s.iconCheck} width={18} height={18} aria-hidden="true">
+              <svg className={s.iconCheck} aria-hidden="true">
                 <use href={`${ICONS_SPRITE}#icon-check`} />
               </svg>
             )}
@@ -101,7 +101,7 @@ const LoginForm: React.FC = () => {
               onClick={() => setShowPassword(v => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              <svg className={s.iconEye} width={18} height={18} aria-hidden="true">
+              <svg className={s.iconEye} aria-hidden="true">
                 <use href={`${ICONS_SPRITE}#icon-eye-off`} />
               </svg>
             </button>

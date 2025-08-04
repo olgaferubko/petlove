@@ -22,7 +22,6 @@
     top: 0;
     right: 0;
     width: 58%;
-    max-width: 300px;
     height: 100%;
     background-color: #fff;
     transform: translateX(100%);
@@ -56,6 +55,8 @@
 
 .iconCross {
     transition: fill 0.3s ease;
+    width: 32px;
+    height: 32px;
 }
 
 .whiteIcon {
@@ -64,4 +65,16 @@
 
 .blackIcon {
     fill: black;
+}
+
+@media (min-width: 768px) {
+    .drawer {
+        width: 48%;
+        padding: 39px 32px 40px;
+    }
+
+    .iconCross {
+        width: 36px;
+        height: 36px;
+    }
 }

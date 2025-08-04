@@ -36,9 +36,7 @@ const ModalApproveAction: React.FC<ModalApproveActionProps> = ({ onConfirm, onCa
           aria-label="Close modal"
         >
           <svg
-            className={s.closeBtn}
-            width={24}
-            height={24}
+            className={s.closeIcon}
             aria-hidden="true"
             focusable="false"
           >
@@ -53,7 +51,6 @@ const ModalApproveAction: React.FC<ModalApproveActionProps> = ({ onConfirm, onCa
             /> 
         </div>            
         <p className={s.text}>Already leaving?</p>
-        {errorMessage && <p className={s.error}>{errorMessage}</p>}
         <div className={s.buttons}>
           <button className={s.yesBtn} onClick={onConfirm}>Yes</button>
           <button className={s.cancelBtn} onClick={onCancel}>Cancel</button>

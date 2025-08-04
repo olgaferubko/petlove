@@ -14,8 +14,6 @@ const Logo: React.FC = () => {
       <div className={s.iconWrapper}>
         <svg
           className={`${s.heartIcon} ${isHomePage ? s.heartIconHome : ''}`}
-          width={17}
-          height={17}
           aria-hidden="true"
           focusable="false"
         >

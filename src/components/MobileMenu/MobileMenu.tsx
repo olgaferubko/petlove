@@ -74,8 +74,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         >
           <svg
             className={`${s.iconCross} ${isAuthPage ? s.whiteIcon : s.blackIcon}`}
-            width={28}
-            height={28}
             aria-hidden="true"
             focusable="false"
           >

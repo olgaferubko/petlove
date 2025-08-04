@@ -69,16 +69,22 @@ input:-webkit-autofill {
 
 .iconError {
     fill: #ef2447;
+    width: 18px;
+    height: 18px;
 }
 
 .iconCheck {
     stroke: #08aa83;
     fill: none;
+    width: 18px;
+    width: 18px;
 }
 
 .iconEye {
     fill: none;
     stroke: #f6b83d;
+    width: 18px;
+    height: 18px;
 }
 
 .toggleBtn {
@@ -107,11 +113,74 @@ input:-webkit-autofill {
     text-transform: uppercase;
     border-radius: 30px;
     width: 100%;
-    height: 42px;
+    padding: 12px;
     margin-bottom: 12px;
     margin-top: 40px;
 }
 
 .submitBtn:hover {
     background: #f9b020;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        gap: 16px;
+        margin-top: 32px;
+    }
+
+    .field {
+        font-size: 16px;
+        line-height: 1.25;
+        padding: 16px;
+    }
+
+    .input {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .error {
+        font-size: 12px;
+        line-height: 1.16667;
+        margin-left: 16px;
+    }
+
+    .iconWrapper {
+        gap: 12px;
+    }
+
+    .iconError {
+        width: 22px;
+        height: 22px;
+    }
+
+    .iconCheck {
+       width: 22px;
+       height: 22px;
+    }
+
+    .iconEye {
+        width: 22px;
+        height: 22px;
+    }
+
+    .success {
+        font-size: 12px;
+        line-height: 1.16667;
+        margin-left: 16px;
+    }
+
+    .submitBtn {
+        font-size: 16px;
+        line-height: 1.25;
+        padding: 16px;
+        margin-bottom: 16px;
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .submitBtn {
+        margin-top: 72px;
+    }
 }

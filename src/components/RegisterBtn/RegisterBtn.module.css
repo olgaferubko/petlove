@@ -40,3 +40,15 @@
         width: 135px;
     }
 }
+
+@media (min-width: 768px) {
+    .defaultBtn {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+
+    .modalBtn {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+}

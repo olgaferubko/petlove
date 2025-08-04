@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+.navDesktop {
+    display: none;
+}
+
 .wrapper {
     display: flex;
     gap: 12px;
@@ -15,6 +19,11 @@
 
 .userBarMobile {
     display: flex;
+}
+
+.authNavWrapper {
+    display: flex;
+    flex-direction: row;
 }
 
 .burger {
@@ -40,6 +49,16 @@
     }
 
     .userBarMobile {
+        display: none;
+    }
+}
+
+@media (min-width: 1280px) {
+    .navDesktop {
+        display: flex;
+    }
+
+    .burger {
         display: none;
     }
 }

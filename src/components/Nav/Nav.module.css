@@ -12,12 +12,16 @@
     line-height: 1.28571;
     letter-spacing: -0.03em;
     color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 30px;
     padding: 15px 0;
     text-align: center;
     width: 119px;
+}
+
+.itemAuth:hover {
+    border: 1px solid #fff;
 }
 
 .item {
@@ -35,10 +39,29 @@
     width: 119px;
 }
 
-.activeAuth {
-    border: 1px solid rgba(255, 255, 255, 0.5);
+.item:hover {
+    border: 1px solid #f6b83d;
 }
 
 .active {
     border: 1px solid #f6b83d;
 }
+
+@media (min-width: 768px) {
+    .itemAuth {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .item {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 1280px) {
+    .list {
+        flex-direction: row;
+    }
+}
+

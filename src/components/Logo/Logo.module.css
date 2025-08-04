@@ -19,8 +19,28 @@
 
 .heartIcon {
     fill: #f6b83d;
+    width: 17px;
+    height: 17px;
 }
 
 .heartIconHome {
     fill: #fff;
+    width: 17px;
+    height: 17px;
+}
+
+@media (min-width: 768px) {
+    .logo {
+        font-size: 28px;
+    }
+
+    .heartIcon {
+        width: 23px;
+        height: 23px;
+    }
+
+    .heartIconHome {
+        width: 23px;
+        height: 23px;
+    }    
 }
