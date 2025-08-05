@@ -4,7 +4,10 @@
     padding: 12px;
     display: flex;
     gap: 4px;
-    margin-top: 20px;
+}
+
+.focused {
+    border: 1px solid #f6b83d;
 }
 
 .input {
@@ -20,7 +23,6 @@
     background: transparent;
     outline: none;
 }
-
 
 .btnWrapper {
     display: flex;
@@ -39,17 +41,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .iconSearch {
     fill: none;
     stroke: #262626;
-    width: 18px;
-    height: 18px;
     display: block;
 }
 
 @media (min-width: 768px) {
+    .inputWrapper {
+        width: 230px;
+        padding: 14px;
+    }
 
+    .input {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 1280px) {
+    .inputWrapper {
+        width: 230px;
+    }
 }

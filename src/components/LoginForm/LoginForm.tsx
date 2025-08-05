@@ -57,7 +57,7 @@ const LoginForm: React.FC = () => {
       <div className={s.wrapper}>
 
         <label
-          className={`${s.field} ${watchedEmail && errors.email ? s.invalid : ''}`}
+          className={`${s.field} ${errors.email ? s.invalid : ''}`}
         >
           <input
             type="email"

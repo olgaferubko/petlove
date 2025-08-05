@@ -42,6 +42,7 @@ input:-webkit-autofill {
     line-height: 1.28571;
     letter-spacing: -0.03em;
     color: rgba(38, 38, 38, 0.8);
+    background: transparent;
 }
 
 .invalid {

@@ -35,6 +35,8 @@
 
 .iconBurger {
     stroke: #262626;
+    width: 32px;
+    height: 32px;
 }
 
 .iconBurgerHome {
@@ -50,6 +52,11 @@
 
     .userBarMobile {
         display: none;
+    }
+
+    .iconBurger {
+        width: 36px;
+        height: 36px;
     }
 }
 

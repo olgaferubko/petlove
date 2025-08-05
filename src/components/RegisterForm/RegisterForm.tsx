@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../redux/auth/hooks'
 import { registerUser } from '../../redux/auth/operations'
 import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
-import s from '../LoginForm/LoginForm.module.css'
+import s from './RegisterForm.module.css'
 
 interface FormValues {
   name: string
@@ -21,20 +21,17 @@ const RegistrationForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid }
-  } = useForm<FormValues>({
-    resolver: yupResolver(registerSchema),
-    mode: 'onChange',
-  })
+const {
+  register,
+  handleSubmit,
+  watch,
+  formState: { errors, isSubmitting }
+} = useForm<FormValues>({
+  resolver: yupResolver(registerSchema),
+  mode: 'onSubmit',
+})
 
-  const watchedName = watch('name', '')
-  const watchedEmail = watch('email', '')
   const watchedPassword = watch('password', '')
-  const watchedConfirm = watch('confirmPassword', '')
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
@@ -59,14 +56,15 @@ const RegistrationForm: React.FC = () => {
     <form onSubmit={handleSubmit(onSubmit)} className={s.form} noValidate>
       <div className={s.wrapper}>
 
-        <label className={`${s.field} ${watchedName && errors.name ? s.invalid : ''}`}>
+        {/* Name */}
+        <label className={`${s.field} ${errors.name ? s.invalid : ''}`}>
           <input
             type="text"
             placeholder="Name"
             {...register('name')}
             className={s.input}
           />
-          {watchedName && errors.name && (
+          {errors.name && (
             <svg className={s.iconError} width={18} height={18}>
               <use href={`${ICONS_SPRITE}#icon-x`} />
             </svg>
@@ -74,14 +72,15 @@ const RegistrationForm: React.FC = () => {
         </label>
         {errors.name && <p className={s.error}>{errors.name.message}</p>}
 
-        <label className={`${s.field} ${watchedEmail && errors.email ? s.invalid : ''}`}>
+        {/* Email */}
+        <label className={`${s.field} ${errors.email ? s.invalid : ''}`}>
           <input
             type="email"
             placeholder="Email"
             {...register('email')}
             className={s.input}
           />
-          {watchedEmail && errors.email && (
+          {errors.email && (
             <svg className={s.iconError} width={18} height={18}>
               <use href={`${ICONS_SPRITE}#icon-x`} />
             </svg>
@@ -89,9 +88,8 @@ const RegistrationForm: React.FC = () => {
         </label>
         {errors.email && <p className={s.error}>{errors.email.message}</p>}
 
-        <label className={`${s.field} ${
-          errors.password ? s.invalid : watchedPassword ? s.valid : ''
-        }`}>
+        {/* Password */}
+        <label className={`${s.field} ${errors.password ? s.invalid : watchedPassword ? s.valid : ''}`}>
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
@@ -123,9 +121,8 @@ const RegistrationForm: React.FC = () => {
           <p className={s.success}>Password is secure</p>
         ) : null}
 
-        <label className={`${s.field} ${
-          errors.password ? s.invalid : watchedPassword ? s.valid : ''
-        }`}>
+        {/* Confirm Password */}
+        <label className={`${s.field} ${errors.confirmPassword ? s.invalid : ''}`}>
           <input
             type={showConfirm ? 'text' : 'password'}
             placeholder="Confirm password"
@@ -152,7 +149,7 @@ const RegistrationForm: React.FC = () => {
 
       </div>
 
-      <button type="submit" className={s.submitBtn} disabled={!isValid}>
+      <button type="submit" className={s.submitBtn} disabled={isSubmitting}>
         Registration
       </button>
     </form>

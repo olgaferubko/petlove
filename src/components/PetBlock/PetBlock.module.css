@@ -2,7 +2,6 @@
     overflow: hidden;
     width: 100%;
     display: block;
-    
 }
 
 .petBlockImage {
@@ -20,10 +19,6 @@
 } 
 
 @media (min-width: 768px) {
-    .petBlockWrapper {
-        border-radius: 60px;
-    }
-
     .petBlockImage {
         width: 704px;
         height: 302px;
@@ -33,7 +28,7 @@
 
 @media (min-width: 1280px) {
     .petBlockImage {
-        width: 592px;
+        width: 1000px;
         height: 654px;
     }
 }

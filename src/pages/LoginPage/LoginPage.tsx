@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
               <img
               className={s.dog}
               src="./images/dog.png"
-              width="44" height="44" alt="Cat"
+              width="44" height="44" alt="Dog"
               /> 
             </div>
             <div className={s.rightBlock}>

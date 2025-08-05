@@ -45,8 +45,6 @@ const Header: React.FC = () => {
         >
           <svg
             className={`${s.iconBurger} ${isHomePage ? s.iconBurgerHome : ''}`}
-            width={32}
-            height={32}
             aria-hidden="true"
           >
             <use href="/icons.svg#icon-menu" />

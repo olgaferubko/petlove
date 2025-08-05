@@ -22,21 +22,23 @@ const NewsPage: React.FC = () => {
   return (
     <main className={s.container}>
       <Header />
-      <Title text="News" />
-      <SearchField
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-        onSearch={handleSearch}
-        placeholder="Search"
-      />
-
+      <div className={s.newsWrapper}>
+        <div className={s.searchWrapper}>
+          <Title text="News" />
+          <SearchField
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onSearch={handleSearch}
+            placeholder="Search"
+          />
+        </div>
       <NewsList
         keyword={searchValue}
         currentPage={currentPage}
         pageSize={pageSize}
         onTotalChange={setTotalPages}
       />
-
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

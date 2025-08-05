@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import s from './SearchField.module.css';
 
 interface SearchFieldProps {
@@ -35,9 +36,11 @@ const SearchField: React.FC<SearchFieldProps> = ({
     }
   };
 
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <div className={`${s.form} ${className}`}>
-      <div className={s.inputWrapper}>
+      <div className={`${s.inputWrapper} ${isFocused ? s.focused : ''}`}>
         <input
           type="text"
           value={value}
@@ -46,6 +49,8 @@ const SearchField: React.FC<SearchFieldProps> = ({
           placeholder={placeholder}
           className={s.input}
           aria-label="Search input"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
         <div className={s.btnWrapper}>
           {value && (
@@ -67,7 +72,7 @@ const SearchField: React.FC<SearchFieldProps> = ({
             aria-label="Search"
             disabled={!value.trim()}
           >
-            <svg className={s.iconSearch}>
+            <svg className={s.iconSearch} width={18} height={18}>
               <use href="/icons.svg#icon-search" />
             </svg>
           </button>

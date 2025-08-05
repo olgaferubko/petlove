@@ -1,6 +1,6 @@
 .pagination {
     display: flex;
-    gap: 11px;
+    gap: 6px;
     justify-content: center;
     align-items: center;
     margin-top: 44px;
@@ -8,7 +8,7 @@
 
 .btnWrapper {
     display: flex;
-    gap: 6px;
+    gap: 3px;
 }
 
 .arrowBtn {
@@ -20,9 +20,8 @@
     flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-    height: 40px;
-    width: 40px;
-
+    height: 35px;
+    width: 35px;
 }
 
 .arrowBtn:disabled {
@@ -40,7 +39,7 @@
 
 .pagesWrapper {
     display: flex;
-    gap: 10px;
+    gap: 5px;
 }
 
 .dots {
@@ -52,8 +51,8 @@
     line-height: 1.25;
     color: #262626;
     border: 1px solid rgba(38, 38, 38, 0.05);
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     display: flex;
     padding: 0;
     align-items: center;
@@ -69,8 +68,8 @@
     line-height: 1.28571;
     color: #262626;
     border: 1px solid rgba(38, 38, 38, 0.05);
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     display: flex;
     padding: 0;
     align-items: center;
@@ -95,6 +94,35 @@
     fill: rgba(38, 38, 38, 0.5);
 }
 
+@media (min-width: 375px) {
+    .pagination {
+        gap: 11px;
+    }
+
+    .btnWrapper {
+        gap: 6px;
+    }
+
+    .pagesWrapper {
+        gap: 10px;
+    }
+
+    .dots {
+        width: 40px;
+        height: 40px;
+    }
+
+    .pageBtn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .arrowBtn {
+        height: 40px;
+        width: 40px;
+    }
+}
+
 @media (min-width: 768px) {
     .pagination {
         gap: 24px;
@@ -106,8 +134,8 @@
     }
 
     .arrowBtn {
-    height: 44px;
-    width: 44px;
+        height: 44px;
+        width: 44px;
     }
 
     .dots {
