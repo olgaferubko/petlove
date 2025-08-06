@@ -29,6 +29,23 @@
     border-radius: 30px;
 }
 
+.btn:hover {
+    background: #f9b020;
+}
+
 .icon {
     stroke: #fff;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 18px;
+        line-height: 1.33333;
+    }
+
+    .btn {
+        font-size: 16px;
+        line-height: 1.25;
+        padding: 10px 20px;
+    }
 }

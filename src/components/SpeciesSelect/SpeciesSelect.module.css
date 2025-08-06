@@ -31,6 +31,8 @@
     stroke: #262626;
     fill: none;
     transition: transform 0.2s;
+    width: 18px;
+    height: 18px;
 }
 
 .dropdown {
@@ -85,4 +87,47 @@
 
 .selectedBorder {
     border: 1px solid #f6b83d;
+}
+
+@media (min-width: 768px) {
+    .inputWrapper {
+        padding: 16px;
+    }
+
+    .value {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .dropdown {
+        padding: 14px 7px 14px 14px;
+    }
+
+    .scrollContainer {
+        max-height: 90px;
+    }
+
+    .scrollContainer::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .option {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 1280px) {
+    .dropdown {
+        padding: 14px 7px 14px 14px;
+    }
+
+    .scrollContainer {
+        max-height: 100px;
+    }
 }

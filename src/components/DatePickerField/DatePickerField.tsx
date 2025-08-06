@@ -47,7 +47,7 @@ const DatePickerField = forwardRef<DatePicker, DatePickerFieldProps>(
             }
           }}
         />
-        <svg className={s.calendarIcon} width={18} height={18}>
+        <svg className={s.calendarIcon}>
           <use href="/icons.svg#icon-calendar" />
         </svg>
       </div>

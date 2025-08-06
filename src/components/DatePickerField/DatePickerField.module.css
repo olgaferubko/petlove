@@ -34,12 +34,14 @@
 .datePickerInput::placeholder {
     color: rgba(38, 38, 38, 0.5);
     font-family: inherit;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .calendarIcon {
     stroke: #262626;
     fill: none;
+    width: 18px;
+    height: 18px;
 }
 
 
@@ -100,4 +102,24 @@
 
 :global(.react-datepicker__day--today.react-datepicker__day--keyboard-selected) {
     outline: none;
+}
+
+@media (min-width: 768px) {
+    .datePickerWrapperWithIcon {
+        padding: 16px;
+    }
+
+    .datePickerInput {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .datePickerInput::placeholder {
+        font-size: 16px;
+    }
+    
+    .calendarIcon {
+        width: 20px;
+        height: 20px;
+    }
 }

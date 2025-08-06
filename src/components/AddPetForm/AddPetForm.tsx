@@ -106,8 +106,7 @@ const formatBirthday = (input: string): string => {
           onClick={() => handleSexChange('female')}
           className={`${s.femaleButton} ${selectedSex === 'female' ? s.selectedFemale : ''}`}
         >
-          <svg className={`${s.femaleIcon} ${selectedSex === 'female' ? s.selectedFemaleIcon : ''}`} 
-            width={20} height={20}>
+          <svg className={`${s.femaleIcon} ${selectedSex === 'female' ? s.selectedFemaleIcon : ''}`}>
             <use href="/icons.svg#icon-female" />
           </svg>
         </button>
@@ -117,8 +116,7 @@ const formatBirthday = (input: string): string => {
           onClick={() => handleSexChange('male')}
           className={`${s.maleButton} ${selectedSex === 'male' ? s.selectedMale : ''}`}
         >
-          <svg className={`${s.maleIcon} ${selectedSex === 'male' ? s.selectedMaleIcon : ''}`}
-            width={20} height={20}>
+          <svg className={`${s.maleIcon} ${selectedSex === 'male' ? s.selectedMaleIcon : ''}`}>
             <use href="/icons.svg#icon-male" />
           </svg>
         </button>
@@ -128,8 +126,7 @@ const formatBirthday = (input: string): string => {
           onClick={() => handleSexChange('other')}
           className={`${s.otherButton} ${selectedSex === 'other' ? s.selectedOther : ''}`}
         >
-          <svg className={`${s.otherIcon} ${selectedSex === 'other' ? s.selectedOtherIcon : ''}`}
-            width={20} height={20}>
+          <svg className={`${s.otherIcon} ${selectedSex === 'other' ? s.selectedOtherIcon : ''}`}>
             <use href="/icons.svg#icon-other" />
           </svg>
         </button>
@@ -140,7 +137,7 @@ const formatBirthday = (input: string): string => {
           {watch('imgURL') ? (
             <img src={watch('imgURL')} alt="Pet preview" className={s.previewImage} />
           ) : (
-            <svg className={s.footprint}  width={34} height={34}>
+            <svg className={s.footprint}>
               <use href="/icons.svg#icon-footprint" />
             </svg>
           )}
@@ -150,7 +147,7 @@ const formatBirthday = (input: string): string => {
           <input {...register('imgURL')} placeholder="Enter URL" className={`${s.input} ${watch('imgURL') ? s.filled : ''}`} />
           <div className={s.uploadButton}>
             Upload photo
-            <svg className={s.iconUpload} width={20} height={20}>
+            <svg className={s.iconUpload}>
               <use href="/icons.svg#icon-upload" />
             </svg>
           </div>

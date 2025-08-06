@@ -5,6 +5,7 @@ import UserBlock from '../UserBlock/UserBlock';
 import PetsBlock from '../PetsBlock/PetsBlock';
 import LogOutBtn from '../LogOutBtn/LogOutBtn';
 import ModalEditUser from '../ModalEditUser/ModalEditUser';
+import ModalApproveAction from '../ModalApproveAction/ModalApproveAction';
 import s from './UserCard.module.css';
 import { RootState, AppDispatch } from '../../redux/store';
 import { logoutUser } from '../../redux/auth/operations';
@@ -12,13 +13,29 @@ import { logoutUser } from '../../redux/auth/operations';
 const UserCard = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.auth.user);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   if (!user) return null;
 
-  const handleEditUser = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
-  const handleLogOut = () => dispatch(logoutUser());
+  const handleEditUser = () => setIsEditModalOpen(true);
+  const handleCloseEditModal = () => setIsEditModalOpen(false);
+
+  const openLogoutModal = () => setIsLogoutModalOpen(true);
+  const closeLogoutModal = () => {
+    setIsLogoutModalOpen(false);
+    setError(null);
+  };
+
+  const handleConfirmLogout = async () => {
+    try {
+      await dispatch(logoutUser()).unwrap();
+    } catch (err) {
+      setError('Something went wrong. Try again.');
+    }
+  };
 
   return (
     <div className={s.wrapper}>
@@ -39,10 +56,18 @@ const UserCard = () => {
       </div>
 
       <div className={s.logout}>
-        <LogOutBtn onClick={handleLogOut} />
+        <LogOutBtn onClick={openLogoutModal} />
       </div>
 
-      {isModalOpen && <ModalEditUser onClose={handleCloseModal} />}
+      {isLogoutModalOpen && (
+        <ModalApproveAction
+          onConfirm={handleConfirmLogout}
+          onCancel={closeLogoutModal}
+          errorMessage={error || undefined}
+        />
+      )}
+
+      {isEditModalOpen && <ModalEditUser onClose={handleCloseEditModal} />}
     </div>
   );
 };

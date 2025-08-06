@@ -23,6 +23,10 @@
     height: 17px;
 }
 
+.heartIcon:hover {
+    fill: #f9b020;
+}
+
 .heartIconHome {
     fill: #fff;
     width: 17px;

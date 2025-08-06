@@ -57,7 +57,7 @@ const fetchSpecies = async () => {
             {field.value || 'Type of pet'}
           </span>
 
-            <svg className={s.icon} width={16} height={16}>
+            <svg className={s.icon}>
               <use href={`/icons.svg#${isOpen ? 'icon-chevron-up' : 'icon-chevron-down'}`} />
             </svg>
           </div>

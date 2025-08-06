@@ -18,7 +18,7 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1280px) {
     .list {
         row-gap: 28px;
         margin-top: 60px;

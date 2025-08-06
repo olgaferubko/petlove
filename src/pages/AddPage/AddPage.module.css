@@ -6,8 +6,34 @@
     min-height: 100vh;
 }
 
+.addWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0 auto;
+    margin-top: 16px;
+}
+
+.addForm {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     .container {
         padding: 32px;
+    }
+
+    .addWrapper {
+        gap: 16px;
+        margin-top: 32px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .addWrapper {
+        flex-direction: row;
+        gap: 32px;
+        max-width: 1216px;
+        margin-top: 64px;
     }
 }

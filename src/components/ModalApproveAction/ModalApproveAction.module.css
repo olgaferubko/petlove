@@ -82,6 +82,10 @@
     width: 100%;
 }
 
+.yesBtn:hover {
+    background: #f9b020;
+}
+
 .cancelBtn {
     border-radius: 30px;
     text-align: center;

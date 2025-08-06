@@ -2,19 +2,30 @@
     padding: 28px 20px 80px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     background: #f9f9f9;
     min-height: 100vh;
+}
+
+.friendsWrapper {
+    margin-top: 54px;
 }
 
 @media (min-width: 768px) {
     .container {
         padding: 32px 32px 80px;
     }
+
+    .friendsWrapper {
+        margin-top: 85px;
+    }
 }
 
 @media (min-width: 1280px) {
     .container {
         padding: 32px 64px 80px;
+    }
+
+    .friendsWrapper {
+        margin-top: 96px;
     }
 }

@@ -7,8 +7,10 @@ const FriendsPage: React.FC = () => {
   return (
     <main className={s.container}>
       <Header />
-      <Title text="Our friends" />
-      <FriendsList />
+        <div className={s.friendsWrapper}>
+          <Title text="Our friends" />
+          <FriendsList />
+        </div>
     </main>
   );
 };
