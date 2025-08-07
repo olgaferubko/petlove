@@ -18,7 +18,7 @@ const UserBar: React.FC = () => {
           {hasAvatar ? (
             <img src={avatar!} alt={`${name} avatar`} className={s.avatarImage} />
           ) : (
-            <svg className={s.avatarIcon} width={20} height={20} aria-hidden="true" focusable="false">
+            <svg className={s.avatarIcon} aria-hidden="true" focusable="false">
               <use href={`${SPRITE_PATH}#icon-user`} />
             </svg>
           )}

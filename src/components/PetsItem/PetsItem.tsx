@@ -45,7 +45,7 @@ const PetsItem = ({ pet, onDelete }: Props) => {
       </div>
 
       <button className={s.trashBtn} onClick={() => onDelete(pet._id)}>
-        <svg className={s.iconTrash} width={16} height={16}>
+        <svg className={s.iconTrash}>
           <use href="/icons.svg#icon-trash" />
         </svg>
       </button>

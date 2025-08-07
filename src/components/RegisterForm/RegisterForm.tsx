@@ -56,7 +56,6 @@ const {
     <form onSubmit={handleSubmit(onSubmit)} className={s.form} noValidate>
       <div className={s.wrapper}>
 
-        {/* Name */}
         <label className={`${s.field} ${errors.name ? s.invalid : ''}`}>
           <input
             type="text"
@@ -72,7 +71,7 @@ const {
         </label>
         {errors.name && <p className={s.error}>{errors.name.message}</p>}
 
-        {/* Email */}
+
         <label className={`${s.field} ${errors.email ? s.invalid : ''}`}>
           <input
             type="email"
@@ -88,7 +87,7 @@ const {
         </label>
         {errors.email && <p className={s.error}>{errors.email.message}</p>}
 
-        {/* Password */}
+
         <label className={`${s.field} ${errors.password ? s.invalid : watchedPassword ? s.valid : ''}`}>
           <input
             type={showPassword ? 'text' : 'password'}
@@ -121,7 +120,6 @@ const {
           <p className={s.success}>Password is secure</p>
         ) : null}
 
-        {/* Confirm Password */}
         <label className={`${s.field} ${errors.confirmPassword ? s.invalid : ''}`}>
           <input
             type={showConfirm ? 'text' : 'password'}

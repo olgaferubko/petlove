@@ -21,3 +21,12 @@ export interface PetsState {
   error: string | null;
   favorites: string[];
 }
+
+export type AddPetRequest = {
+  imgURL: string;
+  title: string;
+  name: string;
+  birthday: string;
+  species: string;
+  sex: 'male' | 'female' | 'unknown' | 'multiple';
+};

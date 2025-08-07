@@ -19,6 +19,6 @@ export const editUserSchema = yup.object().shape({
     .required('Avatar URL is required'),
   phone: yup
     .string()
-    .matches(/^\d{9}$/, 'Phone must be 9 digits')
+    .matches(/^\d{9}$/, 'Phone must be 9 digits and required')
     .required('Phone is required'),
 });

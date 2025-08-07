@@ -100,6 +100,10 @@
     width: 100%;
 }
 
+.cancelBtn:hover {
+    background: rgba(45, 45, 45, 0.144);
+}
+
 @media (min-width: 768px) {
     .modal {
         padding: 80px;

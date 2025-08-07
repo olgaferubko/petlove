@@ -1,0 +1,15 @@
+.petList {
+    display: flex;
+  flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .petList {
+        flex-wrap: wrap;
+    }
+}
+

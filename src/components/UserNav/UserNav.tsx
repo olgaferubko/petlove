@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import UserBar from '../UserBar/UserBar';
 import LogOutBtn from '../LogOutBtn/LogOutBtn';
 import ModalApproveAction from '../ModalApproveAction/ModalApproveAction';
@@ -11,6 +12,7 @@ import s from './UserNav.module.css';
 const UserNav: React.FC = () => {
   const { isLoggedIn, user } = useAuth();
   const dispatch = useAppDispatch();
+  const location = useLocation();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,20 +33,23 @@ const UserNav: React.FC = () => {
 
   if (!isLoggedIn || !user) return null;
 
+  const isHomePage = location.pathname === '/' || location.pathname === '/home';
+  const logoutBtnColor = isHomePage ? 'beige' : 'orange';
+
   return (
     <div className={s.userNav}>
-      
-        <div className={s.loginWrapper}><LogOutBtn onClick={openModal} /></div>
-        <UserBar />
-      
+      <div className={s.loginWrapper}>
+        <LogOutBtn onClick={openModal} color={logoutBtnColor} />
+      </div>
+      <UserBar />
 
-        {isModalOpen && (
-            <ModalApproveAction
-            onConfirm={handleConfirmLogout}
-            onCancel={closeModal}
-            errorMessage={error || undefined}
-            />
-        )}
+      {isModalOpen && (
+        <ModalApproveAction
+          onConfirm={handleConfirmLogout}
+          onCancel={closeModal}
+          errorMessage={error || undefined}
+        />
+      )}
     </div>
   );
 };

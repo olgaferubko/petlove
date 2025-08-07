@@ -81,7 +81,7 @@
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.02em;
-    color: rgba(38, 38, 38, 0.8);
+    color: #262626;
     padding: 9px 20px 10px 9px;
     outline: none;
     background: transparent;
@@ -89,7 +89,7 @@
 
 .input::placeholder {
     color: rgba(38, 38, 38, 0.5);
-    width: 140px;
+   
 }
 
 .uploadStatic {
@@ -118,7 +118,6 @@
     flex-direction: column;
     gap: 10px;
     margin-bottom: 21px;
-
 }
 
 .inputInfo {
@@ -202,4 +201,80 @@
     letter-spacing: -0.03em;
     color: #ef2447;
     margin-left: 12px;
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .modal {
+        padding: 50px;
+        width: 480px;
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 18px;
+        line-height: 1.33333;
+    }
+
+    .avatarWrapper {
+        width: 86px;
+        height: 86px;
+    }
+
+    .avatarImage {
+        width: 86px;
+        height: 86px;
+    }
+
+    .inputGroup {
+        margin-bottom: 20px;
+    }
+
+    .inputAvatar {
+        padding: 12px 20px;
+    }
+
+    .uploadStatic {
+        padding: 12px 16px;
+        font-size: 14px;
+        line-height: 1.28571;
+    }
+
+    .infoWrapper {
+        gap: 14px;
+        margin-bottom: 40px;
+    }
+
+    .inputInfo {
+        padding: 16px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .phoneWrapper {
+        padding: 16px;
+    }
+
+    .prefix {
+        font-size: 16px;
+        line-height: 1.25;
+        margin-right: 4px;
+    }
+
+    .inputPhone {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .submitBtn {
+        padding: 16px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .error {
+        font-size: 12px;
+        line-height: 1.66667;
+        margin-left: 16px;
+    }
 }

@@ -23,5 +23,5 @@ export const addPetSchema = yup.object().shape({
     .required('Birthday is required')
     .matches(/^\d{2}\.\d{2}\.\d{4}$/, 'Date format must be DD.MM.YYYY'),
   species: yup.string().required('Type of pet is required'),
-  sex: yup.string().required('Sex is required'),
+  sex: yup.string().oneOf(['male', 'female', 'unknown', 'multiple']),
 });

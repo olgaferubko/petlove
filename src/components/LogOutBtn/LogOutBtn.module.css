@@ -2,8 +2,6 @@
     border-radius: 30px;
     padding: 12px;
     width: 100%;
-    background: #fff4df;
-    color: #f6b83d;
     font-family: "Manrope", sans-serif;
     font-weight: 700;
     font-size: 14px;
@@ -13,6 +11,28 @@
     text-align: center;
 }
 
-.logoutBtn:hover {
+.orange {
+    background: #f6b83d;
+    color: #fff;
+}
+
+.orange:hover {
+    background: #f9b020;
+}
+
+.beige {
+    background: #fff4df;
+    color: #f6b83d;
+}
+
+.beige:hover {
     background: #fbe7c1;
+}
+
+@media (min-width: 768px) {
+    .logoutBtn {
+        padding: 15px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
 }

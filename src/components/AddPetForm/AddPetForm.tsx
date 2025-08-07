@@ -8,16 +8,21 @@ import toast from 'react-hot-toast';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { addPetSchema } from '../../validations/addPetSchema';
+import { InferType } from 'yup';
 import { addUserPet } from '../../redux/pets/operations';
 import s from './AddPetForm.module.css';
 
 import SpeciesSelect from '../SpeciesSelect/SpeciesSelect';
 import DatePickerField from '../DatePickerField/DatePickerField';
 
+type AddPetFormValues = InferType<typeof addPetSchema>;
+type SexType = AddPetFormValues['sex'];
+
 const AddPetForm = () => {
   const navigate = useNavigate();
-  const [selectedSex, setSelectedSex] = useState('');
+  const [selectedSex, setSelectedSex] = useState<SexType>('unknown');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch<AppDispatch>();
 
   const {
     register,
@@ -26,7 +31,7 @@ const AddPetForm = () => {
     control,
     formState: { errors },
     watch,
-  } = useForm({
+  } = useForm<AddPetFormValues>({
     resolver: yupResolver(addPetSchema),
     defaultValues: {
       imgURL: '',
@@ -34,50 +39,49 @@ const AddPetForm = () => {
       name: '',
       birthday: '',
       species: '',
-      sex: '',
+      sex: 'unknown',
     },
   });
 
-const dispatch = useDispatch<AppDispatch>();
+  const onSubmit = async (data: AddPetFormValues) => {
+    try {
+      const normalizedBirthday =
+        typeof data.birthday === 'string'
+          ? formatBirthday(data.birthday)
+          : new Date(data.birthday).toISOString().split('T')[0];
 
-const onSubmit = async (data: any) => {
-  try {
-    const normalizedBirthday = typeof data.birthday === 'string'
-      ? formatBirthday(data.birthday)
-      : new Date(data.birthday).toISOString().split('T')[0];
+      const normalizedData = {
+        ...data,
+        species: data.species.toLowerCase(),
+        birthday: normalizedBirthday,
+      };
 
-    const normalizedData = {
-      ...data,
-      species: data.species.toLowerCase(),
-      birthday: normalizedBirthday,
-    };
-
-const result = await dispatch(addUserPet(normalizedData)).unwrap();
-if (result && result._id) {
-  toast.success('Pet added successfully!');
-  navigate('/profile');
-    } else {
-      throw new Error('Invalid response from server');
+      const result = await dispatch(addUserPet(normalizedData)).unwrap();
+      if (result && result._id) {
+        toast.success('Pet added successfully!');
+        navigate('/profile');
+      } else {
+        throw new Error('Invalid response from server');
+      }
+    } catch (err: unknown) {
+      console.log('ADD PET ERROR:', err);
+      const message = err instanceof Error ? err.message : 'Unexpected error';
+      toast.error(message);
     }
-  } catch (err: any) {
-    console.log('ADD PET ERROR:', err);
-    toast.error(typeof err === 'string' ? err : err?.message || 'Unexpected error');
-  }
-};
-
-const formatBirthday = (input: string): string => {
-  const [day, month, year] = input.split('.');
-  return `${year}-${month}-${day}`;
   };
-  
+
+  const formatBirthday = (input: string): string => {
+    const [day, month, year] = input.split('.');
+    return `${year}-${month}-${day}`;
+  };
 
   const handleBack = () => {
     navigate('/profile');
   };
 
-  const handleSexChange = (sex: string) => {
+  const handleSexChange = (sex: SexType) => {
     setSelectedSex(sex);
-    setValue('sex', sex);
+    setValue('sex', sex, { shouldValidate: true });
   };
 
   const handleUploadClick = () => {
@@ -99,7 +103,10 @@ const formatBirthday = (input: string): string => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-      <p className={s.title}>Add my pet /<span className={s.decor}>Personal details</span></p>
+      <p className={s.title}>
+        Add my pet /<span className={s.decor}>Personal details</span>
+      </p>
+
       <div className={s.sexButtons}>
         <button
           type="button"
@@ -110,7 +117,7 @@ const formatBirthday = (input: string): string => {
             <use href="/icons.svg#icon-female" />
           </svg>
         </button>
-              
+
         <button
           type="button"
           onClick={() => handleSexChange('male')}
@@ -120,74 +127,98 @@ const formatBirthday = (input: string): string => {
             <use href="/icons.svg#icon-male" />
           </svg>
         </button>
-              
+
         <button
           type="button"
-          onClick={() => handleSexChange('other')}
-          className={`${s.otherButton} ${selectedSex === 'other' ? s.selectedOther : ''}`}
+          onClick={() => handleSexChange('multiple')}
+          className={`${s.otherButton} ${selectedSex === 'multiple' ? s.selectedOther : ''}`}
         >
-          <svg className={`${s.otherIcon} ${selectedSex === 'other' ? s.selectedOtherIcon : ''}`}>
+          <svg className={`${s.otherIcon} ${selectedSex === 'multiple' ? s.selectedOtherIcon : ''}`}>
             <use href="/icons.svg#icon-other" />
           </svg>
         </button>
       </div>
       {errors.sex && <p className={s.error}>{errors.sex.message}</p>}
 
-        <div className={s.imagePreview}>
-          {watch('imgURL') ? (
-            <img src={watch('imgURL')} alt="Pet preview" className={s.previewImage} />
-          ) : (
-            <svg className={s.footprint}>
-              <use href="/icons.svg#icon-footprint" />
-            </svg>
-          )}
-        </div>
+      <div className={s.imagePreview}>
+        {watch('imgURL') ? (
+          <img src={watch('imgURL')} alt="Pet preview" className={s.previewImage} />
+        ) : (
+          <svg className={s.footprint}>
+            <use href="/icons.svg#icon-footprint" />
+          </svg>
+        )}
+      </div>
 
-        <div className={s.inputGroup}>
-          <input {...register('imgURL')} placeholder="Enter URL" className={`${s.input} ${watch('imgURL') ? s.filled : ''}`} />
-          <div className={s.uploadButton}>
-            Upload photo
-            <svg className={s.iconUpload}>
-              <use href="/icons.svg#icon-upload" />
-            </svg>
-          </div>
+      <div className={s.inputGroup}>
+        <input
+          {...register('imgURL')}
+          placeholder="Enter URL"
+          className={`${s.input} ${watch('imgURL') ? s.filled : ''}`}
+        />
+        <div className={s.uploadButton} onClick={handleUploadClick}>
+          Upload photo
+          <svg className={s.iconUpload}>
+            <use href="/icons.svg#icon-upload" />
+          </svg>
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            hidden
+          />
         </div>
-        {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
+      </div>
+      {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
 
-      <input className={`${s.titleNotice} ${watch('title') ? s.filled : ''}`} {...register('title')} placeholder="Title" />
+      <input
+        className={`${s.titleNotice} ${watch('title') ? s.filled : ''}`}
+        {...register('title')}
+        placeholder="Title"
+      />
       {errors.title && <p className={s.error}>{errors.title.message}</p>}
 
-      <input className={`${s.titleNotice} ${watch('name') ? s.filled : ''}`} {...register('name')} placeholder="Pet's Name" />
+      <input
+        className={`${s.titleNotice} ${watch('name') ? s.filled : ''}`}
+        {...register('name')}
+        placeholder="Pet's Name"
+      />
       {errors.name && <p className={s.error}>{errors.name.message}</p>}
+
       <div className={s.pickWrapper}>
-          <div className={s.speciesWrapper}>
-              <Controller
-                  control={control}
-                  name="birthday"
-                  render={({ field }) => (
-                  <DatePickerField
-                    selected={field.value ? new Date(field.value) : null}
-                    onChange={field.onChange}
-                    placeholderText="00.00.0000"
-                  />
-                  )}
+        <div className={s.speciesWrapper}>
+          <Controller
+            control={control}
+            name="birthday"
+            render={({ field }) => (
+              <DatePickerField
+                selected={field.value ? new Date(field.value) : null}
+                onChange={field.onChange}
+                placeholderText="00.00.0000"
               />
-              {errors.birthday && <p className={s.error}>{errors.birthday.message}</p>}
-          </div>
-          <div className={s.speciesWrapper}>
-              <SpeciesSelect
-                  control={control}
-                  name="species"
-                  rules={{ required: 'Species is required' }}
-              />
-            {errors.species && <p className={s.error}>{errors.species.message}</p>}
-          </div>
+            )}
+          />
+          {errors.birthday && <p className={s.error}>{errors.birthday.message}</p>}
+        </div>
+
+        <div className={s.speciesWrapper}>
+          <SpeciesSelect
+            control={control}
+            name="species"
+            rules={{ required: 'Species is required' }}
+          />
+          {errors.species && <p className={s.error}>{errors.species.message}</p>}
+        </div>
       </div>
+
       <div className={s.buttonGroup}>
         <button className={s.backBtn} type="button" onClick={handleBack}>
           Back
         </button>
-        <button className={s.submitBtn} type="submit">Submit</button>
+        <button className={s.submitBtn} type="submit">
+          Submit
+        </button>
       </div>
     </form>
   );

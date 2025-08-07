@@ -96,8 +96,8 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
                   <use href="/icons.svg#icon-upload" />
                 </svg>
               </div>
-              {errors.avatar && <p className={s.error}>{errors.avatar.message}</p>}
-            </div>
+          </div>
+          {errors.avatar && <p className={s.error}>{errors.avatar.message}</p>}
 
           <div className={s.infoWrapper}>
             <input
@@ -115,7 +115,7 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
             {errors.email && <p className={s.error}>{errors.email.message}</p>}
 
             <div className={`${s.phoneWrapper} ${phoneDigits ? s.filled : ''}`}>
-              <span className={s.prefix}>+380</span>
+              <span className={s.prefix}>+380 </span>
               <input
                 type="text"
                 className={s.inputPhone}
@@ -127,9 +127,10 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
                 }}
                 placeholder=""
               />
-              {errors.phone && <p className={s.error}>{errors.phone.message}</p>}
             </div>
+            {errors.phone && <p className={s.error}>{errors.phone.message}</p>}
           </div>
+
 
           <button type="submit" className={s.submitBtn} disabled={isSubmitting}>
             Save changes

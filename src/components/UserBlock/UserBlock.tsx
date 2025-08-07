@@ -17,13 +17,13 @@ const UserBlock = () => {
   };
 
   return (
-    <div className={`${s.container} ${avatar ? s.filledContainer : ''}`}>
+    <div className={s.container}>
       <div className={`${s.avatarContainer} ${avatar ? s.filledAvatarContainer : ''}`}>
         {avatar ? (
           <img src={avatar} alt="User avatar" className={s.avatar} />
         ) : (
           <div className={s.avatarPlaceholder}>
-            <svg className={s.iconUser} width={40} height={40}>
+            <svg className={s.iconUser}>
               <use href="/icons.svg#icon-user" />
             </svg>
           </div>
@@ -32,14 +32,16 @@ const UserBlock = () => {
 
       <div className={s.wrapperInfo}>
         <h3 className={s.sectionTitle}>My information</h3>
-        <div className={s.infoList}>
-          <input className={`${s.input} ${name && s.filled}`} type="text" value={name} readOnly />
-          <input className={`${s.input} ${email && s.filled}`} type="email" value={email} readOnly />
-          <div className={`${s.phoneWrapper} ${phone && s.filled}`}>
+        <ul className={s.infoList}>
+          <li className={s.row}>
+            <input className={`${s.input} ${name && s.filled}`} type="text" value={name} readOnly />
+            <input className={`${s.input} ${email && s.filled}`} type="email" value={email} readOnly />
+          </li>
+          <li className={`${s.phoneWrapper} ${phone && s.filled}`}>
             <span className={s.prefix}>+380</span>
             <input className={s.inputPhone} type="tel" value={formatPhone(phoneDigits)} readOnly />
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   );

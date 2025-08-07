@@ -84,7 +84,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose }) => {
         <Nav onLinkClick={onClose} />
 
         {isLoggedIn ? (
-          <LogOutBtn onClick={openModal} />
+          <LogOutBtn onClick={openModal} color="beige" />
         ) : (
           <AuthNav onLinkClick={onClose} />
         )}

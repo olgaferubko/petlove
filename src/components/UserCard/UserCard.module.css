@@ -2,6 +2,7 @@
     padding: 18px 20px 40px;
     background: #fff;
     border-radius: 30px;
+    margin: 0 auto;
     margin-top: 18px;
     display: flex;
     flex-direction: column;
@@ -35,4 +36,22 @@
 .logout {
     width: 114px;
     margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding: 40px;
+        border-radius: 60px;
+        margin-top: 32px;
+    }
+
+    .logout {
+        width: 136px;
+    }
+}
+
+@media (min-width: 1280px) { 
+    .logout {
+        margin-top: 40px;
+    }
 }

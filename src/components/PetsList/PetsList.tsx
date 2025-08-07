@@ -4,6 +4,7 @@ import PetsItem from '../PetsItem/PetsItem';
 import { getUserPets, deleteUserPet } from '../../redux/pets/operations';
 import { AppDispatch } from '../../redux/store';
 import { toast } from 'react-hot-toast';
+import s from './PetsList.module.css';
 
 interface Pet {
   _id: string;
@@ -50,7 +51,7 @@ const handleDelete = async (id: string) => {
 };
 
   return (
-    <ul>
+    <ul className={s.petList}>
       {pets.map(pet => (
         <PetsItem key={pet._id} pet={pet} onDelete={handleDelete} />
       ))}

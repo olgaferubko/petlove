@@ -56,7 +56,7 @@ const UserCard = () => {
       </div>
 
       <div className={s.logout}>
-        <LogOutBtn onClick={openLogoutModal} />
+        <LogOutBtn onClick={openLogoutModal} color="beige" />
       </div>
 
       {isLogoutModalOpen && (

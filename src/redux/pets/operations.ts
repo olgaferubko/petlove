@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Pet } from './pets-types';
+import { Pet, AddPetRequest } from './pets-types';
 import { fetchCurrentUser } from '../auth/operations';
 import { RootState } from '../store';
 
@@ -50,7 +50,7 @@ type AddPetResponse = {
 
 export const addUserPet = createAsyncThunk<
   Pet,
-  Omit<Pet, '_id'>,
+  AddPetRequest,
   { rejectValue: string }
 >(
   'pets/addUserPet',
@@ -67,11 +67,11 @@ export const addUserPet = createAsyncThunk<
         }
       );
 
-    const newPet = response.data.pets.at(-1);
-    if (!newPet) {
-      return rejectWithValue('Server did not return a new pet');
-    }
-    return newPet;
+      const newPet = response.data.pets.at(-1);
+      if (!newPet) {
+        return rejectWithValue('Server did not return a new pet');
+      }
+      return newPet;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || error.message);
     }

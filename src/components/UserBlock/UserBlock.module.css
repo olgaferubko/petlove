@@ -1,12 +1,6 @@
 .container {
     display: flex;
     flex-direction: column;
-    gap: 28px;
-}
-
-.filledContainer {
-    display: flex;
-    flex-direction: column;
     gap: 30px;
 }
 
@@ -16,7 +10,6 @@
     margin-top: -2px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
     align-items: center;
 }
 
@@ -45,17 +38,8 @@
 .iconUser {
     fill: #f6b83d;
     stroke: #f6b83d;
-}
-
-.uploadBtn {
-    font-family: "Manrope", sans-serif;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33333;
-    letter-spacing: -0.02em;
-    text-decoration: underline;
-    text-decoration-skip-ink: none;
-    color: #262626;
+    width: 40px;
+    height: 40px;
 }
 
 .wrapperInfo {
@@ -77,6 +61,13 @@
    display: flex;
    flex-direction: column;
    gap: 10px; 
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .input {
@@ -125,8 +116,99 @@
     outline: none;
     display: inline-block;
     height: 100%;
+    width: 85%;
 }
 
 .filled {
     border: 1px solid #f6b83d;
+}
+
+@media (min-width: 768px) {
+    .container {
+        gap: 28px;
+    }
+
+    .avatarContainer {
+        width: 110px;
+        margin-top: -38px;
+    }
+
+    .filledAvatarContainer {
+        margin-top: -38px;
+    }
+
+    .avatar {
+        width: 110px;
+        height: 110px;
+    }
+
+    .avatarPlaceholder {
+        width: 110px;
+        height: 110px;
+    }
+
+    .iconUser {
+        width: 50px;
+        height: 50px;
+    }
+
+    .sectionTitle {
+        font-size: 18px;
+        line-height: 1.33333;
+    }
+
+    .infoList {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 14px; 
+    }
+
+    .row {
+        flex-direction: row;
+        gap: 14px;
+    }
+
+    .input {
+        padding: 16px;
+        font-size: 16px;
+        line-height: 1.25;
+        min-width: 0px;
+        flex: 1;
+    }
+
+    .phoneWrapper {
+        padding: 16px;
+        width: 48.9%;
+    }
+
+    .prefix {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .inputPhone {
+        font-size: 16px;
+        line-height: 1.25;
+        width: 90%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .infoList {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .phoneWrapper {
+        width: 100%;
+    }
+
+    .inputPhone {
+        width: 100%;
+    }
 }
