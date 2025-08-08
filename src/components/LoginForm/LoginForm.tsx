@@ -101,8 +101,11 @@ const LoginForm: React.FC = () => {
               onClick={() => setShowPassword(v => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              <svg className={s.iconEye} aria-hidden="true">
-                <use href={`${ICONS_SPRITE}#icon-eye-off`} />
+              <svg
+                className={showPassword ? s.iconEye : s.iconEyeOff}
+                aria-hidden="true"
+              >
+                <use href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`} />
               </svg>
             </button>
           </div>

@@ -2,8 +2,6 @@
     padding: 18px 20px 40px;
     background: #fff;
     border-radius: 30px;
-    margin: 0 auto;
-    margin-top: 18px;
     display: flex;
     flex-direction: column;
 }
@@ -42,7 +40,6 @@
     .wrapper {
         padding: 40px;
         border-radius: 60px;
-        margin-top: 32px;
     }
 
     .logout {
@@ -50,7 +47,11 @@
     }
 }
 
-@media (min-width: 1280px) { 
+@media (min-width: 1280px) {
+    .wrapper {
+        max-width: 520px;
+        margin: 0;
+    } 
     .logout {
         margin-top: 40px;
     }

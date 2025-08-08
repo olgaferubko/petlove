@@ -64,7 +64,7 @@ const {
             className={s.input}
           />
           {errors.name && (
-            <svg className={s.iconError} width={18} height={18}>
+            <svg className={s.iconError}>
               <use href={`${ICONS_SPRITE}#icon-x`} />
             </svg>
           )}
@@ -80,7 +80,7 @@ const {
             className={s.input}
           />
           {errors.email && (
-            <svg className={s.iconError} width={18} height={18}>
+            <svg className={s.iconError}>
               <use href={`${ICONS_SPRITE}#icon-x`} />
             </svg>
           )}
@@ -98,7 +98,7 @@ const {
           />
           <div className={s.iconWrapper}>
             {watchedPassword && !errors.password && (
-              <svg className={s.iconCheck} width={18} height={18}>
+              <svg className={s.iconCheck}>
                 <use href={`${ICONS_SPRITE}#icon-check`} />
               </svg>
             )}
@@ -108,7 +108,7 @@ const {
               onClick={() => setShowPassword(v => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              <svg className={s.iconEye} width={18} height={18}>
+              <svg className={s.iconEye}>
                 <use href={`${ICONS_SPRITE}#icon-eye-off`} />
               </svg>
             </button>
@@ -135,7 +135,7 @@ const {
               onClick={() => setShowConfirm(v => !v)}
               aria-label={showConfirm ? 'Hide confirm password' : 'Show confirm password'}
             >
-              <svg className={s.iconEye} width={18} height={18}>
+              <svg className={s.iconEye}>
                 <use href={`${ICONS_SPRITE}#icon-eye-off`} />
               </svg>
             </button>

@@ -85,6 +85,14 @@ input:-webkit-autofill {
 .iconEye {
     fill: none;
     stroke: #f6b83d;
+    color: #f6b83d;
+    width: 18px;
+    height: 18px;
+}
+
+.iconEyeOff {
+    fill: none;
+    stroke: #f6b83d;
     width: 18px;
     height: 18px;
 }
@@ -161,8 +169,12 @@ input:-webkit-autofill {
        width: 22px;
        height: 22px;
     }
-
     .iconEye {
+        width: 22px;
+        height: 22px;
+    }
+
+    .iconEyeOff {
         width: 22px;
         height: 22px;
     }

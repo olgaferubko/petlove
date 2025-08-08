@@ -184,12 +184,14 @@
     .prefix {
         font-size: 16px;
         line-height: 1.25;
+        height: 20px;
     }
 
     .inputPhone {
         font-size: 16px;
         line-height: 1.25;
         width: 90%;
+        height: 20px;
     }
 }
 

@@ -1,6 +1,8 @@
 .myNotices {
-    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
 }
+
 .tabs {
     display: flex;
     gap: 10px;
@@ -35,8 +37,14 @@
     color: #fff;
 }
 
+.active:hover {
+    background: #f9b020;
+}
+
 .empty {
-    margin-top: 60px; 
+    margin: 0 auto;
+    margin-top: 60px;
+    max-width: 335px;
 }
 
 .favorites {
@@ -62,4 +70,49 @@
     letter-spacing: -0.02em;
     text-align: center;
     color: #262626;
+}
+
+@media (min-width: 768px) {
+    .tabs {
+        gap: 8px;
+    }
+
+    .tab {
+        padding: 14px;
+        width: 142px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .active {
+        padding: 14px;
+        width: 142px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .empty {
+        margin-top: 160px;
+        max-width: 458px;
+    }
+
+    .favorites {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .viewed {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 1280px) {
+    .myNotices {
+        width: 664px;
+    }
+
+    .tabs {
+        margin-top: 40px;
+    }
 }
