@@ -88,6 +88,13 @@ input:-webkit-autofill {
     height: 18px;
 }
 
+.iconEyeOff {
+    fill: none;
+    stroke: #f6b83d;
+    width: 18px;
+    height: 18px;
+}
+
 .toggleBtn {
     background: transparent;
     display: flex;
@@ -161,6 +168,11 @@ input:-webkit-autofill {
     }
 
     .iconEye {
+        width: 22px;
+        height: 22px;
+    }
+
+    .iconEyeOff {
         width: 22px;
         height: 22px;
     }

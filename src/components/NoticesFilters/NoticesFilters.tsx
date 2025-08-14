@@ -1,27 +1,22 @@
-import { useEffect, useState, useCallback, useRef } from 'react';
-import Select from 'react-select';
-import AsyncSelect from 'react-select/async';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
+import { components } from 'react-select';
+import AsyncSelect from 'react-select/async';
+import { customSelectStyles } from './selectStyles';
 import SearchField from '../SearchField/SearchField';
+import CustomSelect from '../CustomSelect/CustomSelect';
 import s from './NoticesFilters.module.css';
 
-type OptionType = {
-  label: string;
-  value: string;
-};
+export type Option = { label: string; value: string }
 
 export type Filters = {
-  search: string;
-  category: OptionType | null;
-  sex: OptionType | null;
-  species: OptionType | null;
-  city: OptionType | null;
-  sort: 'popular' | 'unpopular' | 'cheap' | 'expensive';
-};
-
-type NoticesFiltersProps = {
-  onFilterChange: (filters: Filters) => void;
-};
+  search: string
+  category: Option | null
+  sex: Option | null
+  species: Option | null
+  city: Option | null
+  sort: 'popular' | 'unpopular' | 'cheap' | 'expensive' | null
+}
 
 const defaultFilters: Filters = {
   search: '',
@@ -29,151 +24,161 @@ const defaultFilters: Filters = {
   sex: null,
   species: null,
   city: null,
-  sort: 'popular',
-};
+  sort: null,
+}
 
-const NoticesFilters: React.FC<NoticesFiltersProps> = ({ onFilterChange }) => {
-  const [filters, setFilters] = useState<Filters>(defaultFilters);
-  const [categoryOptions, setCategoryOptions] = useState<OptionType[]>([]);
-  const [sexOptions, setSexOptions] = useState<OptionType[]>([]);
-  const [speciesOptions, setSpeciesOptions] = useState<OptionType[]>([]);
-
-  const prevFiltersRef = useRef<Filters>(filters);
-
-  useEffect(() => {
-    axios.get<string[]>('/notices/categories').then(({ data }) => {
-      setCategoryOptions(data.map((item: string) => ({ label: item, value: item })));
-    });
-    axios.get<string[]>('/notices/sex').then(({ data }) => {
-      setSexOptions(data.map((item: string) => ({ label: item, value: item })));
-    });
-    axios.get<string[]>('/notices/species').then(({ data }) => {
-      setSpeciesOptions(data.map((item: string) => ({ label: item, value: item })));
-    });
-  }, []);
-
-  useEffect(() => {
-    const prev = prevFiltersRef.current;
-    const filtersChanged = JSON.stringify(prev) !== JSON.stringify(filters);
-    if (filtersChanged) {
-      onFilterChange(filters);
-      prevFiltersRef.current = filters;
-    }
-  }, [filters, onFilterChange]);
-
-  const handleInputChange = (key: keyof Filters, value: any) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
-  };
-
-  const loadCityOptions = useCallback(async (inputValue: string): Promise<OptionType[]> => {
-    if (inputValue.length < 3) return [];
-    const response = await axios.get<any[]>(`/cities?keyword=${inputValue}`);
-    return response.data.map((city: any) => ({
-      label: city.cityEn,
-      value: city.cityEn,
-    }));
-  }, []);
-
-  const handleReset = () => setFilters(defaultFilters);
-
+const DropdownIndicator = (props: any) => {
   return (
-    <div className={s.form}>
-      <SearchField
-        value={filters.search}
-        onChange={(e) => handleInputChange('search', e.target.value)}
-        onSearch={(query) => handleInputChange('search', query)}
-        placeholder="Search"
-      />
-
-      <Select
-        options={categoryOptions}
-        value={filters.category}
-        onChange={(option) => handleInputChange('category', option)}
-        placeholder="Category"
-        isClearable
-      />
-
-      <Select
-        options={sexOptions}
-        value={filters.sex}
-        onChange={(option) => handleInputChange('sex', option)}
-        placeholder="By gender"
-        isClearable
-      />
-
-      <Select
-        options={speciesOptions}
-        value={filters.species}
-        onChange={(option) => handleInputChange('species', option)}
-        placeholder="By type"
-        isClearable
-      />
-
-      <div className={s.cityWrapper}>
-        <AsyncSelect
-          classNamePrefix="custom"
-          className={s.locationSelect}
-          value={filters.city}
-          onChange={(option) => handleInputChange('city', option)}
-          placeholder="Location"
-          cacheOptions
-          defaultOptions
-          isClearable
-          loadOptions={loadCityOptions}
-        />
-        <svg className={s.iconSearch} width={20} height={20} aria-hidden="true">
-          <use href="/icons.svg#icon-search" />
-        </svg>
-      </div>
-
-      <div className={s.radioGroup}>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            value="popular"
-            checked={filters.sort === 'popular'}
-            onChange={() => handleInputChange('sort', 'popular')}
-          />
-          Popular
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            value="unpopular"
-            checked={filters.sort === 'unpopular'}
-            onChange={() => handleInputChange('sort', 'unpopular')}
-          />
-          Unpopular
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            value="cheap"
-            checked={filters.sort === 'cheap'}
-            onChange={() => handleInputChange('sort', 'cheap')}
-          />
-          Cheap
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="sort"
-            value="expensive"
-            checked={filters.sort === 'expensive'}
-            onChange={() => handleInputChange('sort', 'expensive')}
-          />
-          Expensive
-        </label>
-      </div>
-
-      <button type="button" onClick={handleReset} className={s.resetBtn}>
-        Reset
-      </button>
-    </div>
+    <components.DropdownIndicator {...props}>
+      <svg className={s.iconSearch} width={18} height={18}>
+        <use href="/icons.svg#icon-search" />
+      </svg>
+    </components.DropdownIndicator>
   );
 };
 
-export default NoticesFilters;
+function buildApiParams(filters: Filters, page = 1) {
+  const params: Record<string, any> = { page, limit: 6 }
+
+  if (filters.search) params.keyword = filters.search
+  if (filters.category) params.category = filters.category.value
+  if (filters.sex) params.sex = filters.sex.value
+  if (filters.species) params.species = filters.species.value
+  if (filters.city) params.locationId = filters.city.value 
+
+
+  params.byDate = true 
+  if (filters.sort === 'popular') {
+    params.byPopularity = true
+    params.byDate = false
+  } else if (filters.sort === 'expensive') {
+    params.byPrice = true
+    params.byDate = false
+  }
+
+  return params
+}
+
+export default function NoticesFilters({
+  onFilterChange,
+}: {
+  onFilterChange: (f: Filters) => void;
+}) {
+  const [filters, setFilters] = useState(defaultFilters)
+  const [categoryOptions, setCategoryOptions] = useState<Option[]>([])
+  const [sexOptions, setSexOptions] = useState<Option[]>([])
+  const [speciesOptions, setSpeciesOptions] = useState<Option[]>([])
+
+  const prevFiltersRef = useRef(filters)
+
+  useEffect(() => {
+    axios.get<string[]>('/notices/categories')
+      .then(({ data }) => setCategoryOptions(data.map(i => ({ label: i, value: i }))))
+    axios.get<string[]>('/notices/sex')
+      .then(({ data }) => setSexOptions(data.map(i => ({ label: i, value: i }))))
+    axios.get<string[]>('/notices/species')
+      .then(({ data }) => setSpeciesOptions(data.map(i => ({ label: i, value: i }))))
+  }, [])
+
+  useEffect(() => {
+    if (JSON.stringify(prevFiltersRef.current) !== JSON.stringify(filters)) {
+      const params = buildApiParams(filters)
+      onFilterChange(filters)
+      prevFiltersRef.current = filters
+    }
+  }, [filters, onFilterChange])
+
+  const handleChange = (key: keyof Filters, value: any) => {
+    if (key === 'sort' && filters.sort === value) value = null
+    setFilters(prev => ({ ...prev, [key]: value }))
+  }
+
+  const loadCityOptions = useCallback(async (inputValue: string) => {
+    if (inputValue.length < 3) return []
+    const { data } = await axios.get<{ id: string; cityEn: string }[]>(`/cities?keyword=${inputValue}`);
+return data.map(c => ({ label: c.cityEn, value: c.id }));
+  }, [])
+
+  const sortOptions: Filters['sort'][] = ['popular', 'unpopular', 'cheap', 'expensive']
+
+  return (
+    <div className={s.form}>
+      <div className={s.filtersWrapper}>
+          <SearchField
+            value={filters.search}
+            onChange={e => handleChange('search', e.target.value)}
+            onSearch={query => handleChange('search', query)}
+            placeholder="Search"
+          />
+
+          <div className={s.wrapperCategory}>
+            <CustomSelect options={categoryOptions} value={filters.category}
+              onChange={v => handleChange('category', v)} placeholder="Category" />
+            <CustomSelect options={sexOptions} value={filters.sex}
+              onChange={v => handleChange('sex', v)} placeholder="By gender" />
+          </div>
+
+        <div className={s.typeWrapper}>
+          <div className={s.speciesWrapper}>
+            <CustomSelect options={speciesOptions} value={filters.species}
+              onChange={v => handleChange('species', v)} placeholder="By type" />
+          </div>
+            <div className={s.cityWrapper}>
+              <AsyncSelect
+                value={filters.city}
+                onChange={v => handleChange('city', v)}
+                placeholder="Location"
+                cacheOptions
+                defaultOptions
+                isClearable
+                loadOptions={loadCityOptions}
+                styles={customSelectStyles}
+                components={{ DropdownIndicator }}
+                classNamePrefix="custom"
+              />
+            </div>
+          </div>
+      </div>
+
+      <div className={s.btnWrapper}>
+        <div className={s.radioGroup}>
+          {sortOptions.map(sortOption => {
+            const isSelected = filters.sort === sortOption;
+            return (
+              <div
+                key={sortOption!}
+                className={`${s.radioWrapper} ${isSelected ? s.selected : ''}`}
+              >
+                <label>
+                  <input
+                    type="radio"
+                    name="sort"
+                    value={sortOption!}
+                    checked={isSelected}
+                    onChange={() => handleChange('sort', sortOption)}
+                  />
+                  {sortOption!.charAt(0).toUpperCase() + sortOption!.slice(1)}
+                </label>
+                {isSelected && (
+                  <svg
+                    className={s.clearSort}
+                    width={18}
+                    height={18}
+                    onClick={() => handleChange('sort', null)}
+                  >
+                    <use href="/icons.svg#icon-x" />
+                  </svg>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+          <button type="button" onClick={() => setFilters(defaultFilters)}
+            className={s.resetBtn}>
+            Reset
+          </button>
+        </div>
+    </div>
+  )
+}

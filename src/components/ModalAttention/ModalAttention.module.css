@@ -76,3 +76,20 @@
         width: 335px;
     }
 }
+
+@media (min-width: 768px) {
+    .modal {
+        padding: 60px;
+        width: 466px;
+    }
+
+    .textWrapper {
+        margin-bottom: 28px;
+    }
+
+    .heading {
+        font-size: 24px;
+        line-height: 1.67777;
+    }
+
+}

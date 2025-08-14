@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import s from './SearchField.module.css';
 
 interface SearchFieldProps {
@@ -16,6 +17,9 @@ const SearchField: React.FC<SearchFieldProps> = ({
   placeholder = 'Search',
   className = '',
 }) => {
+  const location = useLocation();
+  const isNoticesPage = location.pathname.startsWith('/notices');
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -40,14 +44,18 @@ const SearchField: React.FC<SearchFieldProps> = ({
 
   return (
     <div className={`${s.form} ${className}`}>
-      <div className={`${s.inputWrapper} ${isFocused ? s.focused : ''}`}>
+      <div
+        className={`${s.inputWrapper} ${isFocused ? s.focused : ''} ${
+          isNoticesPage ? s.noticesInputWrapper : ''
+        }`}
+      >
         <input
           type="text"
           value={value}
           onChange={onChange}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
-          className={s.input}
+          className={`${s.input} ${isNoticesPage ? s.noticesInput : ''}`}
           aria-label="Search input"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}

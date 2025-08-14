@@ -77,4 +77,11 @@
         font-size: 16px;
         line-height: 1.25;
     }
+
+    .modalStyle {
+        width: 140px;
+        padding: 14px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
 }

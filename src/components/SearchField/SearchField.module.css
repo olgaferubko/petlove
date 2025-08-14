@@ -24,6 +24,19 @@
     outline: none;
 }
 
+.noticesInputWrapper {
+    background: #fff;
+    border: none;
+}
+
+.noticesInput {
+    background: #fff;
+}
+
+.noticesInput::placeholder {
+    color: #262626;
+}
+
 .btnWrapper {
     display: flex;
     gap: 4px;
@@ -58,6 +71,9 @@
     .input {
         font-size: 16px;
         line-height: 1.25;
+    }
+    .noticesInputWrapper {
+        width: 265px;
     }
 }
 

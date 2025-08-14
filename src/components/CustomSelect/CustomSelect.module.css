@@ -1,0 +1,155 @@
+.wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.inputWrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 30px;
+    padding: 12px;
+    background: #fff;
+    color: #262626;
+    text-transform: capitalize;
+}
+
+.value {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+}
+
+.selected {
+    color: #f6b83d;
+}
+
+.icon {
+    stroke: #262626;
+    fill: none;
+    transition: transform 0.2s;
+    width: 18px;
+    height: 18px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    margin-top: 4px;
+    z-index: 10;
+    overflow: hidden;
+    padding: 12px 6px 12px 12px;
+}
+
+.scrollContainer {
+    max-height: 122px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollContainer::-webkit-scrollbar-thumb {
+    background: rgba(38, 38, 38, 0.08);
+    border-radius: 10px;
+}
+
+.option {
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: rgba(38, 38, 38, 0.6);
+}
+
+.option:hover {
+    background-color: #f5f5f5;
+}
+
+.activeShowAll {
+    color: #f6b83d;
+}
+
+.active {
+    color: #f6b83d;
+}
+
+.selectedBorder {
+    border: 1px solid #f6b83d;
+}
+
+.select {
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.hasValue {
+  border: 1px solid #ccc; 
+}
+
+
+.customSelect__control {
+  box-shadow: none;
+}
+
+.customSelect__placeholder {
+  color: #888;
+}
+
+@media (min-width: 768px) {
+    .inputWrapper {
+        padding: 14px;
+    }
+
+    .value {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .dropdown {
+        padding: 14px 7px 14px 14px;
+    }
+
+    .scrollContainer {
+        max-height: 90px;
+    }
+
+    .scrollContainer::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .option {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 1280px) {
+    .dropdown {
+        padding: 14px 7px 14px 14px;
+    }
+
+    .scrollContainer {
+        max-height: 100px;
+    }
+}

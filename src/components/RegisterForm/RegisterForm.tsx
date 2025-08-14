@@ -108,8 +108,8 @@ const {
               onClick={() => setShowPassword(v => !v)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
-              <svg className={s.iconEye}>
-                <use href={`${ICONS_SPRITE}#icon-eye-off`} />
+              <svg className={showPassword ? s.iconEye : s.iconEyeOff}>
+                <use href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`} />
               </svg>
             </button>
           </div>
@@ -135,8 +135,8 @@ const {
               onClick={() => setShowConfirm(v => !v)}
               aria-label={showConfirm ? 'Hide confirm password' : 'Show confirm password'}
             >
-              <svg className={s.iconEye}>
-                <use href={`${ICONS_SPRITE}#icon-eye-off`} />
+              <svg className={showPassword ? s.iconEye : s.iconEyeOff}>
+                <use href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`} />
               </svg>
             </button>
           </div>

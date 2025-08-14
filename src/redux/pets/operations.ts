@@ -1,19 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Pet, AddPetRequest } from './pets-types';
-import { fetchCurrentUser } from '../auth/operations';
-import { RootState } from '../store';
 
 interface FetchPetsParams {
   filters: {
     search: string;
     category?: string;
-    sex?: string;
+    sex?: 'unknown' | 'female' | 'male' | 'multiple';
     species?: string;
-    city?: string;
-    sort: string;
+    city?: string; 
+    sort: '' | 'popular' | 'unpopular' | 'cheap' | 'expensive';
   };
   page: number;
+  limit?: number;
+  clientMode?: boolean; 
 }
 
 interface FetchPetsResponse {
@@ -25,34 +25,38 @@ const BASE_URL = 'https://petlove.b.goit.study/api';
 
 export const fetchPets = createAsyncThunk<FetchPetsResponse, FetchPetsParams>(
   'pets/fetchPets',
-  async ({ filters, page }) => {
+  async ({ filters, page, limit }) => {
     const params = new URLSearchParams();
+    params.append('page', String(page));
+    params.append('limit', String(limit ?? 6));
 
-    params.append('page', page.toString());
-    if (filters.search) params.append('search', filters.search);
+    if (filters.search) params.append('keyword', filters.search);
     if (filters.category) params.append('category', filters.category);
     if (filters.sex) params.append('sex', filters.sex);
     if (filters.species) params.append('species', filters.species);
-    if (filters.city) params.append('city', filters.city);
-    params.append('sort', filters.sort);
+    if (filters.city) params.append('locationId', filters.city);
 
-    const response = await axios.get<FetchPetsResponse>(
+    let byDate = 'true';
+
+    if (filters.sort === 'popular' || filters.sort === 'unpopular') {
+      params.append('byPopularity', 'true');
+      byDate = 'false';
+    } else if (filters.sort === 'expensive') {
+      params.append('byPrice', 'true');
+      byDate = 'false';
+    }
+    params.append('byDate', byDate);
+
+    const { data } = await axios.get<FetchPetsResponse>(
       `${BASE_URL}/notices?${params.toString()}`
     );
-
-    return response.data;
+    return data;
   }
 );
 
-type AddPetResponse = {
-  pets: Pet[];
-};
+type AddPetResponse = { pets: Pet[] };
 
-export const addUserPet = createAsyncThunk<
-  Pet,
-  AddPetRequest,
-  { rejectValue: string }
->(
+export const addUserPet = createAsyncThunk<Pet, AddPetRequest, { rejectValue: string }>(
   'pets/addUserPet',
   async (petData, { rejectWithValue }) => {
     try {
@@ -66,11 +70,8 @@ export const addUserPet = createAsyncThunk<
           },
         }
       );
-
       const newPet = response.data.pets.at(-1);
-      if (!newPet) {
-        return rejectWithValue('Server did not return a new pet');
-      }
+      if (!newPet) return rejectWithValue('Server did not return a new pet');
       return newPet;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || error.message);
@@ -82,15 +83,13 @@ export const getUserPets = createAsyncThunk(
   'pets/getUserPets',
   async (_, thunkAPI) => {
     try {
-    const res = await fetch(`${BASE_URL}/users/current/full`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
-
+      const res = await fetch(`${BASE_URL}/users/current/full`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
       if (!res.ok) throw new Error('Failed to fetch user data');
-
       const user = await res.json();
       return user.pets;
     } catch (err: any) {
@@ -99,15 +98,12 @@ export const getUserPets = createAsyncThunk(
   }
 );
 
-
 export const deleteUserPet = createAsyncThunk<string, string, { rejectValue: string }>(
   'pets/deleteUserPet',
   async (petId, { rejectWithValue }) => {
     try {
       await axios.delete(`${BASE_URL}/users/current/pets/remove/${petId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       return petId;
     } catch (error: any) {
@@ -116,18 +112,12 @@ export const deleteUserPet = createAsyncThunk<string, string, { rejectValue: str
   }
 );
 
-export const addFavoriteToBackend = createAsyncThunk<
-  string,
-  string,
-  { rejectValue: string }
->(
+export const addFavoriteToBackend = createAsyncThunk<string, string, { rejectValue: string }>(
   'pets/addFavorite',
   async (id, { rejectWithValue }) => {
     try {
       await axios.post(`${BASE_URL}/notices/favorites/add/${id}`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       return id;
     } catch (error: any) {
@@ -136,18 +126,12 @@ export const addFavoriteToBackend = createAsyncThunk<
   }
 );
 
-export const deleteFavoriteFromBackend = createAsyncThunk<
-  string,
-  string,
-  { rejectValue: string }
->(
+export const deleteFavoriteFromBackend = createAsyncThunk<string, string, { rejectValue: string }>(
   'pets/deleteFavorite',
   async (id, { rejectWithValue }) => {
     try {
       await axios.delete(`${BASE_URL}/notices/favorites/remove/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
       return id;
     } catch (error: any) {

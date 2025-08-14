@@ -13,7 +13,7 @@
 
 .modal {
     background: #fff;
-    padding: 40px 20px;
+    padding: 40px 28px;
     border-radius: 30px;
     position: relative;
     width: 280px;
@@ -185,5 +185,53 @@
 
     .favBtn {
         width: 135px;
+    }
+}
+
+@media (min-width: 768px) {
+    .modal {
+        padding: 40px 72px;
+        width: 473px;
+    }
+
+    .image {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 16px;
+    }
+
+    .category {
+        left: 166px;
+        font-size: 14px;
+        line-height: 1.28571;
+        width: 52px;
+    }
+
+    .title {
+        font-size: 18px;
+        line-height: 1.33333;
+    }
+
+    .rating {
+        margin-bottom: 20px;
+    }
+
+    .price {
+        font-size: 18px;
+        line-height: 1.33333;;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .favBtn {
+        padding: 14px 8px;
+        width: 160px;
+    }
+
+    .contactBtn {
+        padding: 14px;
     }
 }

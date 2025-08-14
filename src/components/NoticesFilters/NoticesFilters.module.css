@@ -1,0 +1,197 @@
+.radioWrapper input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.form {
+    background: #fff4df;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+.filtersWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.filtersWrapper::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: rgba(38, 38, 38, 0.1);
+    margin-top: 8px;
+    width: 100%;
+}
+
+.wrapperCategory {
+    display: flex;
+    gap: 8px;
+}
+
+.typeWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.iconSearch {
+    fill: none;
+    stroke: #262626;
+}
+
+.btnWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.radioWrapper {
+    display: flex;
+    gap: 6px;
+    padding: 12px;
+    background: #fff;
+    border-radius: 30px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+}
+
+.selected {
+    background: #f6b83d;
+    color: #fff;
+}
+
+.clearSort {
+    fill: #fff;
+    stroke: #fff;
+}
+
+.resetBtn {
+    background: #f6b83d;
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #fff;
+    padding: 12px;
+    border-radius: 30px;
+}
+
+@media (min-width: 768px) {
+    .form {
+        padding: 40px 32px;
+        max-width: 704px;
+        margin: 0 auto;
+    }
+
+    .filtersWrapper {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .wrapperCategory {
+        gap: 16px;
+        width: 356px;
+    }
+
+    .typeWrapper {
+        flex-direction: row;
+        gap: 16px;
+        width: 433px;
+    }
+
+    .speciesWrapper {
+        width: 190px;
+    }
+
+    .cityWrapper {
+        width: 227px;
+    }
+
+    .radioGroup {
+        gap: 8px;
+    }
+
+    .btnWrapper {
+        flex-direction: row;
+        gap: 0px;
+        justify-content: space-between;
+    }
+
+    .radioWrapper {
+        gap: 8px;
+        padding: 14px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .resetBtn {
+        font-size: 16px;
+        line-height: 1.25;
+        padding: 14px;
+        width: 170px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .form {
+        padding: 40px;
+        max-width: 1216px;
+        margin: 0 auto;
+    }
+
+    .filtersWrapper {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .wrapperCategory {
+        gap: 16px;
+        width: 406px;
+    }
+
+    .radioGroup {
+        gap: 8px;
+    }
+
+    .btnWrapper {
+        flex-direction: row;
+        gap: 0px;
+        justify-content: space-between;
+    }
+
+    .radioWrapper {
+        gap: 8px;
+        padding: 14px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+
+    .resetBtn {
+        font-size: 16px;
+        line-height: 1.25;
+        padding: 14px;
+        width: 170px;
+    }
+}

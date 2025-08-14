@@ -20,6 +20,7 @@ export interface PetsState {
   isLoading: boolean;
   error: string | null;
   favorites: string[];
+ lastRequestId: string | null;
 }
 
 export type AddPetRequest = {
