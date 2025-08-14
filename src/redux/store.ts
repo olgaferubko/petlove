@@ -19,6 +19,7 @@ const initialState = {
     isLoading: false,
     error: null,
     favorites: [],
+    lastRequestId: null,
   },
 };
 
