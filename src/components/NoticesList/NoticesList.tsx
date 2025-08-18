@@ -25,7 +25,7 @@ type NoticesListProps = {
 const NoticesList: React.FC<NoticesListProps> = ({ notices, isLoading, error }) => {
   if (isLoading) return <p className={s.status}>Loading notices...</p>;
   if (error) return <p className={s.status}>Error: {error}</p>;
-  if (notices.length === 0) return <p className={s.status}>No notices found</p>;
+  if (notices.length === 0) return <p className={s.status}>Oops, no notices found!</p>;
 
   return (
     <ul className={s.list}>

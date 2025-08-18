@@ -4,13 +4,11 @@ import {
   loginUser,
   logoutUser,
   fetchCurrentUser,
-  updateUser
-} from './operations';
-import {
+  updateUser,
   addFavoriteToBackend,
   deleteFavoriteFromBackend
-} from '../pets/operations';
-import type {  User, AuthState, AuthResponse, CurrentUserResponse } from './auth-types';
+} from './operations';
+import type { User, AuthState, AuthResponse, CurrentUserResponse } from './auth-types';
 
 const initialState: AuthState = {
   user: null,
@@ -92,7 +90,9 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCurrentUser.fulfilled, (state, action: PayloadAction<User>) => {
-        state.user = action.payload;
+        if (!state.user || JSON.stringify(state.user) !== JSON.stringify(action.payload)) {
+          state.user = action.payload;
+        }
         state.isLoggedIn = true;
         state.isRefreshing = false;
       })
@@ -105,18 +105,12 @@ const authSlice = createSlice({
         state.user = { ...action.payload };
       })
 
-      .addCase(addFavoriteToBackend.fulfilled, (state, action: PayloadAction<string>) => {
-        const id = action.payload;
-        if (state.user && !state.user.noticesFavorites?.includes(id)) {
-          state.user.noticesFavorites.push(id);
-        }
+      .addCase(addFavoriteToBackend.fulfilled, (state, action: PayloadAction<CurrentUserResponse>) => {
+        state.user = action.payload;
       })
 
-      .addCase(deleteFavoriteFromBackend.fulfilled, (state, action: PayloadAction<string>) => {
-        const id = action.payload;
-        if (state.user && state.user.noticesFavorites) {
-          state.user.noticesFavorites = state.user.noticesFavorites.filter(favId => favId !== id);
-        }
+      .addCase(deleteFavoriteFromBackend.fulfilled, (state, action: PayloadAction<CurrentUserResponse>) => {
+        state.user = action.payload;
       });
   },
 });

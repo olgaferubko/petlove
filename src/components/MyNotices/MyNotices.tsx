@@ -1,7 +1,7 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { RootState, AppDispatch } from '../../redux/store';
-import { deleteFavoriteFromBackend } from '../../redux/pets/operations';
+import { deleteFavoriteFromBackend, fetchCurrentUser } from '../../redux/auth/operations';
 import { Pet } from '../../redux/pets/pets-types';
 import NoticesItem from '../NoticesItem/NoticesItem';
 import s from './MyNotices.module.css';
@@ -18,23 +18,25 @@ export const MyNotices = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [activeTab, setActiveTab] = useState<TabValue>('favorites');
 
-  const allPets = useSelector((state: RootState) => state.pets.items, shallowEqual);
-const favoritesIds = useSelector(
-  (state: RootState) => state.auth.user?.noticesFavorites || []
-);
+ const user = useSelector((state: RootState) => state.auth.user);
 
-const viewed = useSelector(
-  (state: RootState) => state.auth.user?.noticesViewed || []
-);
+  
+  const allPets = useSelector((state: RootState) => state.pets.items, shallowEqual);
 
   const handleDeleteFavorite = (id: string) => {
     dispatch(deleteFavoriteFromBackend(id));
   };
 
-const list: Pet[] = useMemo(() => {
-  const ids = activeTab === 'favorites' ? favoritesIds : viewed;
-  return allPets.filter(pet => ids.includes(pet._id));
-}, [activeTab, favoritesIds, viewed, allPets]);
+  const favorites = user?.noticesFavorites || [];
+
+  const viewed = useSelector(
+    (state: RootState) => state.auth.user?.noticesViewed || []
+  );
+
+  const list = useMemo(() => {
+    if (activeTab === 'favorites') return favorites;
+    return allPets.filter(pet => viewed.includes(pet._id));
+  }, [activeTab, favorites, viewed, allPets]);
 
   return (
     <div className={s.myNotices}>
@@ -52,14 +54,16 @@ const list: Pet[] = useMemo(() => {
       </div>
 
       {list.length > 0 ? (
-        list.map((notice: Pet) => (
-          <NoticesItem
-            key={notice._id}
-            notice={notice}
-            showDeleteIcon={activeTab === 'favorites'}
-            onDelete={() => handleDeleteFavorite(notice._id)}
-          />
-        ))
+          <ul className={s.list}>
+              {list.map(notice => (
+                <NoticesItem
+                  key={notice._id}
+                  notice={notice}
+                  showDeleteIcon={activeTab === 'favorites'}
+                  onDelete={() => handleDeleteFavorite(notice._id)}
+                />
+              ))}
+            </ul>
       ) : (
         <div className={s.empty}>
           {activeTab === 'favorites' ? (

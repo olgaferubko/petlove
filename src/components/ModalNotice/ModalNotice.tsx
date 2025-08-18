@@ -39,8 +39,10 @@ const ModalNotice: FC<ModalNoticeProps> = ({ notice, onClose, user, onToggleFavo
     popularity,
   } = notice;
 
-  const favorites = useSelector((state: RootState) => state.pets.favorites);
-  const isFavorite = favorites.includes(_id);
+  const favorites = useSelector((state: RootState) => state.auth.user?.noticesFavorites || []);
+  const isFavorite = favorites.some(fav =>
+    typeof fav === 'string' ? fav === _id : fav._id === _id
+  );
 
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => {
@@ -111,11 +113,12 @@ const ModalNotice: FC<ModalNoticeProps> = ({ notice, onClose, user, onToggleFavo
             </svg>
           </button>
 
-          {user?.email && (
-            <a href={`mailto:${user.email}`} className={s.contactBtn}>
-              Contact
-            </a>
-          )}
+          <a
+            href="mailto:petlove@gmail.com?subject=Contact about pet notice"
+            className={s.contactBtn}
+          >
+            Contact
+          </a>
         </div>
       </div>
     </div>

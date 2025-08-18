@@ -2,6 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { components } from 'react-select';
 import AsyncSelect from 'react-select/async';
+import { useMediaQuery } from "react-responsive";
 import { customSelectStyles } from './selectStyles';
 import SearchField from '../SearchField/SearchField';
 import CustomSelect from '../CustomSelect/CustomSelect';
@@ -37,6 +38,42 @@ const DropdownIndicator = (props: any) => {
   );
 };
 
+const ClearIndicator = (props: any) => {
+  const {
+    innerProps: { ref, ...restInnerProps },
+  } = props;
+
+  return (
+    <svg
+      {...restInnerProps}
+      ref={ref}
+      className={s.iconClear}
+      width={18}
+      height={18}
+    >
+      <use href="/icons.svg#icon-x" />
+    </svg>
+  );
+};
+
+const Input = (props: any) => (
+  <>
+    <components.Input {...props} />
+    {props.selectProps.inputValue && (
+      <svg
+        className={s.iconClearAbsolute}
+        width={18}
+        height={18}
+        onClick={() =>
+          props.selectProps.onInputChange('', { action: 'input-change' })
+        }
+      >
+        <use href="/icons.svg#icon-x" />
+      </svg>
+    )}
+  </>
+);
+
 function buildApiParams(filters: Filters, page = 1) {
   const params: Record<string, any> = { page, limit: 6 }
 
@@ -68,6 +105,7 @@ export default function NoticesFilters({
   const [categoryOptions, setCategoryOptions] = useState<Option[]>([])
   const [sexOptions, setSexOptions] = useState<Option[]>([])
   const [speciesOptions, setSpeciesOptions] = useState<Option[]>([])
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const prevFiltersRef = useRef(filters)
 
@@ -93,11 +131,16 @@ export default function NoticesFilters({
     setFilters(prev => ({ ...prev, [key]: value }))
   }
 
-  const loadCityOptions = useCallback(async (inputValue: string) => {
-    if (inputValue.length < 3) return []
-    const { data } = await axios.get<{ id: string; cityEn: string }[]>(`/cities?keyword=${inputValue}`);
-return data.map(c => ({ label: c.cityEn, value: c.id }));
-  }, [])
+const loadCityOptions = useCallback(async (inputValue: string) => {
+  if (inputValue.length < 3) return []
+  const { data } = await axios.get<{ _id: string; cityEn: string }[]>(`/cities?keyword=${inputValue}`);
+  return data.map(c => ({
+    label: c.cityEn,
+    value: c._id,
+  }));
+}, [])
+  
+  
 
   const sortOptions: Filters['sort'][] = ['popular', 'unpopular', 'cheap', 'expensive']
 
@@ -132,8 +175,18 @@ return data.map(c => ({ label: c.cityEn, value: c.id }));
                 defaultOptions
                 isClearable
                 loadOptions={loadCityOptions}
-                styles={customSelectStyles}
-                components={{ DropdownIndicator }}
+                styles={{
+                  ...customSelectStyles,
+                  control: (provided, state) => ({
+                    ...customSelectStyles.control(provided, state),
+                    minHeight: isMobile ? 42 : 48, 
+                  }),
+                }}
+                components={{
+                    DropdownIndicator,
+                    ClearIndicator,
+                    Input,
+                }}
                 classNamePrefix="custom"
               />
             </div>

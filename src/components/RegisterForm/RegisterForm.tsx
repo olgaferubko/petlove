@@ -20,6 +20,7 @@ const ICONS_SPRITE = '/icons.svg'
 const RegistrationForm: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  
 
 const {
   register,
@@ -32,6 +33,7 @@ const {
 })
 
   const watchedPassword = watch('password', '')
+  const watchedConfirm = watch('confirmPassword', '')
 
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
@@ -88,7 +90,15 @@ const {
         {errors.email && <p className={s.error}>{errors.email.message}</p>}
 
 
-        <label className={`${s.field} ${errors.password ? s.invalid : watchedPassword ? s.valid : ''}`}>
+        <label
+          className={`${s.field} ${
+            errors.password
+              ? s.invalid
+              : watchedPassword.length >= 7
+              ? s.valid
+              : ''
+          }`}
+        >
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
@@ -97,7 +107,7 @@ const {
             autoComplete="new-password"
           />
           <div className={s.iconWrapper}>
-            {watchedPassword && !errors.password && (
+            {watchedPassword.length >= 7 && !errors.password && (
               <svg className={s.iconCheck}>
                 <use href={`${ICONS_SPRITE}#icon-check`} />
               </svg>
@@ -109,7 +119,9 @@ const {
               aria-label={showPassword ? 'Hide password' : 'Show password'}
             >
               <svg className={showPassword ? s.iconEye : s.iconEyeOff}>
-                <use href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`} />
+                <use
+                  href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`}
+                />
               </svg>
             </button>
           </div>
@@ -120,7 +132,17 @@ const {
           <p className={s.success}>Password is secure</p>
         ) : null}
 
-        <label className={`${s.field} ${errors.confirmPassword ? s.invalid : ''}`}>
+        <label
+          className={`${s.field} ${
+            errors.confirmPassword
+              ? s.invalid
+              : watchedConfirm &&
+                watchedConfirm === watchedPassword &&
+                watchedPassword.length >= 7
+              ? s.valid
+              : ''
+          }`}
+        >
           <input
             type={showConfirm ? 'text' : 'password'}
             placeholder="Confirm password"
@@ -129,14 +151,26 @@ const {
             autoComplete="new-password"
           />
           <div className={s.iconWrapper}>
+            {watchedConfirm &&
+              watchedConfirm === watchedPassword &&
+              watchedPassword.length >= 7 &&
+              !errors.confirmPassword && (
+                <svg className={s.iconCheck}>
+                  <use href={`${ICONS_SPRITE}#icon-check`} />
+                </svg>
+              )}
             <button
               type="button"
               className={s.toggleBtn}
               onClick={() => setShowConfirm(v => !v)}
               aria-label={showConfirm ? 'Hide confirm password' : 'Show confirm password'}
             >
-              <svg className={showPassword ? s.iconEye : s.iconEyeOff}>
-                <use href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`} />
+              <svg className={showConfirm ? s.iconEye : s.iconEyeOff}>
+                <use
+                  href={`${ICONS_SPRITE}${
+                    showConfirm ? '#icon-eye' : '#icon-eye-off'
+                  }`}
+                />
               </svg>
             </button>
           </div>

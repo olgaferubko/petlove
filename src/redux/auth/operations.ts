@@ -95,7 +95,7 @@ export const fetchCurrentUser = createAsyncThunk<
     setAuthorizationHeader(token);
     try {
       const { data } = await axios.get<CurrentUserResponse>(
-        '/users/current/full'
+        `/users/current/full`
       );
       return data;
     } catch (err: any) {
@@ -149,6 +149,40 @@ export const updateUser = createAsyncThunk<
         err.response?.data?.message ||
         err.message;
       return rejectWithValue(msg);
+    }
+  }
+);
+
+export const addFavoriteToBackend = createAsyncThunk<
+  CurrentUserResponse,
+  string,
+  { rejectValue: string }
+>(
+  'auth/addFavorite',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.post(`/notices/favorites/add/${id}`);
+      const { data } = await axios.get<CurrentUserResponse>('/users/current/full');
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
+    }
+  }
+);
+
+export const deleteFavoriteFromBackend = createAsyncThunk<
+  CurrentUserResponse,
+  string,
+  { rejectValue: string }
+>(
+  'auth/deleteFavorite',
+  async (id, { rejectWithValue }) => {
+    try {
+      await axios.delete(`/notices/favorites/remove/${id}`);
+      const { data } = await axios.get<CurrentUserResponse>('/users/current/full');
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || error.message);
     }
   }
 );

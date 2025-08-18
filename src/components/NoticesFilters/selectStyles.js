@@ -3,19 +3,20 @@ export const customSelectStyles = {
     ...provided,
     backgroundColor: '#fff',
     borderRadius: '30px',
-    border: state.hasValue ? '1px solid #ccc' : '1px solid transparent',
+    border: state.hasValue ? '1px solid #f6b83d' : '1px solid transparent',
     boxShadow: 'none',
     minHeight: 42,
-    padding: '12px',
+    padding: '11px',
     width: '100%',
     '&:hover': {
-      border: state.hasValue ? '1px solid #ccc' : '1px solid transparent',
+      border: state.hasValue ? '1px solid #f6b83d' : '1px solid transparent',
     },
   }),
   input: (provided) => ({
     ...provided,
     margin: 0,
     padding: 0,
+    height: 18,
   }),
   valueContainer: (provided) => ({
     ...provided,

@@ -1,10 +1,11 @@
 import { useState, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalAttention from '../ModalAttention/ModalAttention';
 import ModalNotice from '../ModalNotice/ModalNotice';
 import { shallowEqual } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
-import { addFavoriteToBackend, deleteFavoriteFromBackend } from '../../redux/pets/operations';
+import { addFavoriteToBackend, deleteFavoriteFromBackend } from '../../redux/auth/operations';
 import { AppDispatch, RootState } from '../../redux/store';
 import { Pet } from '../../redux/pets/pets-types';
 import s from './NoticesItem.module.css';
@@ -26,6 +27,8 @@ const formatDate = (dateStr: string) => {
 const NoticesItem: React.FC<NoticesItemProps> = ({ notice, showDeleteIcon, onDelete }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { isLoggedIn } = useAuth();
+  const location = useLocation();
+  const isProfilePage = location.pathname.startsWith('/profile');
 
 const favorites = useSelector(
   (state: RootState) => state.auth.user?.noticesFavorites || [],
@@ -33,7 +36,7 @@ const favorites = useSelector(
 );
 
 const isFavorite = useMemo(
-  () => favorites.includes(notice._id),
+  () => favorites.some(fav => (typeof fav === 'string' ? fav === notice._id : fav._id === notice._id)),
   [favorites, notice._id]
 );
 
@@ -71,7 +74,7 @@ const isFavorite = useMemo(
 
   return (
     <>
-      <div className={s.card}>
+      <div className={`${s.card} ${isProfilePage ? s.profile : ''}`}>
         <img src={notice.imgURL} alt={notice.title} className={s.image} />
         <div className={s.content}>
           <div>

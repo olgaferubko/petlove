@@ -55,6 +55,30 @@
     stroke: #262626;
 }
 
+.custom__control {
+    position: relative;
+}
+
+.iconClear {
+    fill: #262626;
+    stroke: #262626;
+    position: absolute;
+    right: 34px; 
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.iconClearAbsolute {
+    fill: #262626;
+    stroke: #262626;
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
 .btnWrapper {
     display: flex;
     flex-direction: column;
@@ -101,7 +125,6 @@
     .form {
         padding: 40px 32px;
         max-width: 704px;
-        margin: 0 auto;
     }
 
     .filtersWrapper {

@@ -82,7 +82,6 @@
     color: rgba(38, 38, 38, 0.5);
 }
 
-
 .comment {
     font-family: "Manrope", sans-serif;
     font-weight: 500;
@@ -178,13 +177,27 @@
         width: 342px;
     }
 
+    .card.profile {
+        padding: 14px 14px 24px;
+        gap: 14px;
+    }
+
     .image {
-        width: 294px;
-        height: 178px;
+        width: 314px;
+        height: 162px;
+    }
+
+    .card.profile .image {
+        width: 314px;
+        height: 162px;
     }
 
     .content {
         gap: 24px;
+    }
+
+    .card.profile .content {
+        gap: 16px;
     }
 
     .title {
@@ -194,6 +207,10 @@
 
     .popularity {
         line-height: 1.42857;
+    }
+
+    .card.profile .infoList{
+        margin-bottom: 14px;
     }
 
     .price {
@@ -218,8 +235,16 @@
         width: 363px;
     }
 
+    .card.profile {
+        width: 320px;
+    }
+
     .image {
         width: 315px;
+    }
+
+    .card.profile .image{
+        width: 292px;
     }
 }
 

@@ -1,6 +1,6 @@
 .container {
     padding: 20px;
-    padding-top: 28px;
+    padding-top: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +15,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 16px;
 }
 
 .code {
@@ -26,7 +26,6 @@
     font-size: 120px;
     line-height: 1;
     color: #fff;
-  
 }
 
 .image {
@@ -60,12 +59,16 @@
 }
 
 @media (min-width: 768px) {
+    .container {
+        padding: 32px;
+    }
+
     .wrapper {
+        gap: 40px;
         margin-top: 32px;
     }
-    
+
     .code {
-        font-weight: 800;
         font-size: 300px;
     }
 
@@ -76,14 +79,13 @@
 
     .text {
         font-size: 24px;
-        line-height: 1.16667;
-        letter-spacing: -0.03em;
+        line-height: 1.66667;
     }
 
     .home {
-        padding: 14px;
-        width: 162px;
         font-size: 16px;
         line-height: 1.25;
+        padding: 14px;
+        width: 162px;
     }
 }

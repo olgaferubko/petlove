@@ -135,6 +135,7 @@
 
 .buttons {
     display: flex;
+    width: 100%;
     gap: 10px;
 }
 
@@ -171,7 +172,9 @@
     letter-spacing: -0.03em;
     color: #f6b83d;
     width: 100%;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (min-width: 375px) {
@@ -233,5 +236,6 @@
 
     .contactBtn {
         padding: 14px;
+        width: 160px;
     }
 }

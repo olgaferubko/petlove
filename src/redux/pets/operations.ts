@@ -112,30 +112,4 @@ export const deleteUserPet = createAsyncThunk<string, string, { rejectValue: str
   }
 );
 
-export const addFavoriteToBackend = createAsyncThunk<string, string, { rejectValue: string }>(
-  'pets/addFavorite',
-  async (id, { rejectWithValue }) => {
-    try {
-      await axios.post(`${BASE_URL}/notices/favorites/add/${id}`, null, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      return id;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Server error');
-    }
-  }
-);
 
-export const deleteFavoriteFromBackend = createAsyncThunk<string, string, { rejectValue: string }>(
-  'pets/deleteFavorite',
-  async (id, { rejectWithValue }) => {
-    try {
-      await axios.delete(`${BASE_URL}/notices/favorites/remove/${id}`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      });
-      return id;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data?.message || 'Server error');
-    }
-  }
-);

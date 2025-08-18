@@ -6,7 +6,7 @@ export interface User {
   email: string;
   avatar?: string | null;
   phone?: string | null;
-  noticesFavorites: string[];
+  noticesFavorites: Pet[]; 
   noticesViewed?: string[];
 }
 
@@ -29,7 +29,7 @@ export interface CurrentUserResponse {
   name: string;
   email: string;
   avatar?: string;
-  noticesFavorites: string[];
+  noticesFavorites: Pet[]; 
 }
 
 export interface AuthState {
