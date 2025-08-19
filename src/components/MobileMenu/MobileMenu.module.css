@@ -61,10 +61,12 @@
 
 .whiteIcon {
     fill: white;
+    stroke: white;
 }
 
 .blackIcon {
     fill: black;
+    stroke: black;
 }
 
 @media (min-width: 768px) {

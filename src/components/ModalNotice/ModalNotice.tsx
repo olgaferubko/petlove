@@ -1,30 +1,18 @@
 import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { RootState, AppDispatch } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { addViewed } from '../../redux/viewed/slice';
+import { Pet } from '../../redux/pets/pets-types';
 import s from './ModalNotice.module.css';
 
-type Notice = {
-  _id: string;
-  title: string;
-  name: string;
-  birthday: string;
-  comment: string;
-  sex: string;
-  species: string;
-  category: string;
-  price?: string;
-  imgURL: string;
-  popularity: number;
-};
-
 type ModalNoticeProps = {
-  notice: Notice;
+  notice: Pet;
   onClose: () => void;
-  user?: { email?: string; phone?: string } | null;
   onToggleFavorite: () => void;
 };
 
-const ModalNotice: FC<ModalNoticeProps> = ({ notice, onClose, user, onToggleFavorite }) => {
+const ModalNotice: FC<ModalNoticeProps> = ({ notice, onClose, onToggleFavorite }) => {
   const {
     _id,
     title,
@@ -43,6 +31,11 @@ const ModalNotice: FC<ModalNoticeProps> = ({ notice, onClose, user, onToggleFavo
   const isFavorite = favorites.some(fav =>
     typeof fav === 'string' ? fav === _id : fav._id === _id
   );
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(addViewed(notice));
+  }, [dispatch, notice._id]);
 
   useEffect(() => {
     const onEsc = (e: KeyboardEvent) => {
@@ -72,7 +65,7 @@ const ModalNotice: FC<ModalNoticeProps> = ({ notice, onClose, user, onToggleFavo
     <div className={s.backdrop} onClick={(e) => e.currentTarget === e.target && onClose()}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
         <button type="button" className={s.closeBtn} onClick={onClose} aria-label="Close modal">
-          <svg width={24} height={24}>
+          <svg className={s.closeIcon} width={24} height={24}>
             <use href="/icons.svg#icon-x" />
           </svg>
         </button>

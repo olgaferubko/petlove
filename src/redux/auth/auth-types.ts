@@ -7,7 +7,7 @@ export interface User {
   avatar?: string | null;
   phone?: string | null;
   noticesFavorites: Pet[]; 
-  noticesViewed?: string[];
+  noticesViewed?: Pet[];
 }
 
 export interface LoginCredentials {

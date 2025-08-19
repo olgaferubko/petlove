@@ -49,7 +49,7 @@
 
 @media (min-width: 1280px) {
     .wrapper {
-        max-width: 520px;
+        width: 520px;
         margin: 0;
     } 
     .logout {

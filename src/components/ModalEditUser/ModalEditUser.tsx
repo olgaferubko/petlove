@@ -1,21 +1,30 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
-import { updateUser, fetchCurrentUser } from '../../redux/auth/operations';
-import { toast } from 'react-hot-toast';
-import { editUserSchema, FormData } from '../../validations/validationEditSchema';
-import s from './ModalEditUser.module.css';
+import { useEffect } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../redux/store'
+import { updateUser, fetchCurrentUser } from '../../redux/auth/operations'
+import { toast } from 'react-hot-toast'
+import { editUserSchema, FormData } from '../../validations/validationEditSchema'
+import s from './ModalEditUser.module.css'
 
 interface ModalEditUserProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch<AppDispatch>()
+  const user = useSelector((state: RootState) => state.auth.user)
 
-  if (!user) return null;
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
+
+  if (!user) return null
 
   const {
     register,
@@ -31,14 +40,14 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
       avatar: user.avatar || '',
       phone: user.phone?.replace(/^\+380/, '') || '',
     },
-  });
+  })
 
-  const avatarPreview = watch('avatar');
-  const phoneRaw = watch('phone');
-  const phoneDigits = phoneRaw.replace(/\D/g, '').slice(0, 9);
+  const avatarPreview = watch('avatar')
+  const phoneRaw = watch('phone')
+  const phoneDigits = phoneRaw.replace(/\D/g, '').slice(0, 9)
   const formattedPhone = phoneDigits
     ? `${phoneDigits.slice(0, 2)} ${phoneDigits.slice(2, 5)} ${phoneDigits.slice(5, 7)} ${phoneDigits.slice(7)}`
-    : '';
+    : ''
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const payload = {
@@ -46,20 +55,25 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
       email: data.email.trim(),
       avatar: data.avatar.trim(),
       phone: `+380${data.phone.replace(/\D/g, '')}`,
-    };
+    }
 
     try {
-      await dispatch(updateUser(payload)).unwrap();
-      await dispatch(fetchCurrentUser());
-      toast.success('User updated successfully');
-      onClose();
+      await dispatch(updateUser(payload)).unwrap()
+      await dispatch(fetchCurrentUser())
+      toast.success('User updated successfully')
+      onClose()
     } catch (error: any) {
-      toast.error(error?.message || 'Failed to update user');
+      toast.error(error?.message || 'Failed to update user')
     }
-  };
+  }
 
   return (
-    <div className={s.backdrop}>
+    <div
+      className={s.backdrop}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+    >
       <div className={s.modal}>
         <button className={s.closeBtn} onClick={onClose}>
           <svg className={s.closeIcon} width={24} height={24}>
@@ -81,21 +95,21 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
           </div>
 
           <div className={s.inputGroup}>
-              <input
-                {...register('avatar')}
-                type="text"
-                placeholder="Enter image URL"
-                className={`${s.inputAvatar} ${watch('avatar') ? s.filled : ''}`}
-                onChange={(e) => {
-                  setValue('avatar', e.target.value, { shouldValidate: true });
-                }}
-              />
-              <div className={s.uploadStatic}>
+            <input
+              {...register('avatar')}
+              type="text"
+              placeholder="Enter image URL"
+              className={`${s.inputAvatar} ${watch('avatar') ? s.filled : ''}`}
+              onChange={(e) => {
+                setValue('avatar', e.target.value, { shouldValidate: true })
+              }}
+            />
+            <div className={s.uploadStatic}>
               Upload photo
-                <svg className={s.uploadIcon} width={18} height={18}>
-                  <use href="/icons.svg#icon-upload" />
-                </svg>
-              </div>
+              <svg className={s.uploadIcon} width={18} height={18}>
+                <use href="/icons.svg#icon-upload" />
+              </svg>
+            </div>
           </div>
           {errors.avatar && <p className={s.error}>{errors.avatar.message}</p>}
 
@@ -122,8 +136,8 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
                 inputMode="numeric"
                 value={formattedPhone}
                 onChange={(e) => {
-                  const clean = e.target.value.replace(/\D/g, '').slice(0, 9);
-                  setValue('phone', clean, { shouldValidate: true });
+                  const clean = e.target.value.replace(/\D/g, '').slice(0, 9)
+                  setValue('phone', clean, { shouldValidate: true })
                 }}
                 placeholder=""
               />
@@ -131,14 +145,13 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
             {errors.phone && <p className={s.error}>{errors.phone.message}</p>}
           </div>
 
-
           <button type="submit" className={s.submitBtn} disabled={isSubmitting}>
             Save changes
           </button>
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ModalEditUser;
+export default ModalEditUser

@@ -13,7 +13,7 @@
 
 .modal {
     background: #fff;
-    padding: 40px 20px;
+    padding: 40px 25px;
     border-radius: 30px;
     position: relative;
     width: 280px;
@@ -61,18 +61,37 @@
     color: #f6b83d;
 }
 
-.warningText {
+.messageText {
     text-align: center;
     font-family: "Manrope", sans-serif;
     font-weight: 500;
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.02em;
-    text-align: center;
     color: #2b2b2a;
 }
 
-@media (min-width: 375px) {
+.profileBtn {
+    background: #f6b83d;
+    border-radius: 30px;
+    padding: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #fff;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileBtn:hover {
+    background: #f9b020;
+}
+
+@media (min-width: 375px ) {
     .modal {
         width: 335px;
     }
@@ -80,17 +99,23 @@
 
 @media (min-width: 768px) {
     .modal {
-        padding: 60px;
-        width: 466px;
+        padding: 55px;
+        width: 410px;
     }
 
     .textWrapper {
+        gap: 14px;
         margin-bottom: 28px;
     }
 
     .heading {
         font-size: 24px;
-        line-height: 1.67777;
+        line-height: 1.66667;
     }
 
+    .profileBtn {
+        padding: 14px;
+        font-size: 16px;
+        line-height: 1.25;
+    }
 }

@@ -179,13 +179,25 @@ const loadCityOptions = useCallback(async (inputValue: string) => {
                   ...customSelectStyles,
                   control: (provided, state) => ({
                     ...customSelectStyles.control(provided, state),
-                    minHeight: isMobile ? 42 : 48, 
+                    minHeight: isMobile ? 42 : 48,
+                  }),
+                  singleValue: (provided) => ({
+                    ...customSelectStyles.singleValue(provided),
+                    fontSize: isMobile ? 14 : 16,
+                  }),
+                  option: (provided, state) => ({
+                    ...customSelectStyles.option(provided, state),
+                    fontSize: isMobile ? 14 : 16,
+                  }),
+                  placeholder: (provided) => ({
+                    ...customSelectStyles.placeholder(provided),
+                    fontSize: isMobile ? 14 : 16,
                   }),
                 }}
                 components={{
-                    DropdownIndicator,
-                    ClearIndicator,
-                    Input,
+                  DropdownIndicator,
+                  ClearIndicator,
+                  Input,
                 }}
                 classNamePrefix="custom"
               />

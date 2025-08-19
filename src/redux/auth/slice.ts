@@ -31,6 +31,19 @@ const authSlice = createSlice({
         state.user.avatar = action.payload;
       }
     },
+    addViewedNotice(state, action: PayloadAction<any>) {
+      if (state.user) {
+        const exists = state.user.noticesViewed?.some(
+          n => n._id === action.payload._id
+        );
+        if (!exists) {
+          state.user.noticesViewed = [
+            ...(state.user.noticesViewed || []),
+            action.payload,
+          ];
+        }
+      }
+    },
   },
   extraReducers: builder => {
     builder

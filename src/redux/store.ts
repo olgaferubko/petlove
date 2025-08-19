@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/slice';
 import petsReducer from './pets/slice';
+import viewedReducer from './viewed/slice';
 
 const tokenFromStorage = localStorage.getItem('token');
 
@@ -27,6 +28,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     pets: petsReducer,
+    viewed: viewedReducer,
   },
   preloadedState: initialState,
 });

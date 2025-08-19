@@ -121,6 +121,10 @@
     border-radius: 30px;
 }
 
+.resetBtn:hover {
+    background: #f9b020;
+}
+
 @media (min-width: 768px) {
     .form {
         padding: 40px 32px;

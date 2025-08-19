@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ModalAttention from '../ModalAttention/ModalAttention';
 import ModalNotice from '../ModalNotice/ModalNotice';
+import CongratsModal from '../CongratsModal/CongratsModal';
 import { shallowEqual } from 'react-redux';
 import useAuth from '../../hooks/useAuth';
 import { addFavoriteToBackend, deleteFavoriteFromBackend } from '../../redux/auth/operations';
@@ -42,6 +43,7 @@ const isFavorite = useMemo(
 
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showNoticeModal, setShowNoticeModal] = useState(false);
+  const [showCongratsModal, setShowCongratsModal] = useState(false);
 
   const handleToggleFavorite = () => {
     if (!isLoggedIn) {
@@ -53,6 +55,10 @@ const isFavorite = useMemo(
       dispatch(deleteFavoriteFromBackend(notice._id));
     } else {
       dispatch(addFavoriteToBackend(notice._id));
+
+      if (favorites.length === 0) {
+        setShowCongratsModal(true);
+      }
     }
   };
 
@@ -134,6 +140,9 @@ const isFavorite = useMemo(
           onClose={() => setShowNoticeModal(false)}
           onToggleFavorite={handleToggleFavorite}
         />
+      )}
+      {showCongratsModal && (
+        <CongratsModal onClose={() => setShowCongratsModal(false)} />
       )}
     </>
   );

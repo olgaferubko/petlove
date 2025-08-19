@@ -6,6 +6,7 @@ import { fetchCurrentUser } from './redux/auth/operations';
 import { selectToken, selectIsRefreshing } from './redux/auth/selectors';
 import PrivateRoute from './components/Routes/PrivateRoute'
 import RestrictedRoute from './components/Routes/RestrictedRoute';
+import Loader from './components/Loader/Loader';
 
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
@@ -29,12 +30,12 @@ const App: React.FC = () => {
     }, [dispatch, token]);
 
   if (isRefreshing) {
-    return <div>Loading...</div>;
+    return <Loader />; 
   }
   
   
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route
           path="/login"
