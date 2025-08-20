@@ -56,6 +56,10 @@ const NewsList: React.FC<NewsListProps> = ({
 
   if (loading) return <BaseLoader />;
 
+   if (news.length === 0) {
+    return <p className={s.noNews}>No news found.</p>;
+  }
+
   return (
     <ul className={s.newsList}>
       {news.map(item => (

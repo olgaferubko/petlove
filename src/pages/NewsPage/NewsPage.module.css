@@ -9,6 +9,7 @@
 .newsWrapper {
     margin: 0 auto;
     margin-top: 54px;
+    min-width: 280px;
 }
 
 .searchWrapper {
@@ -25,6 +26,7 @@
 
     .newsWrapper {
         margin-top: 85px;
+        min-width: 704px;
     }
 
     .searchWrapper {
@@ -42,5 +44,6 @@
 
     .newsWrapper {
         margin-top: 96px;
+        min-width: 1153px;
     }
 }

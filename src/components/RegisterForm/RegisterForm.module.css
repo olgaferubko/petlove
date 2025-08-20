@@ -65,11 +65,13 @@ input:-webkit-autofill {
 
 .iconWrapper {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
 .iconError {
     fill: #ef2447;
+    stroke: #ef2447;
     width: 18px;
     height: 18px;
 }
@@ -78,7 +80,7 @@ input:-webkit-autofill {
     stroke: #08aa83;
     fill: none;
     width: 18px;
-    width: 18px;
+    height: 18px;
 }
 
 .iconEye {

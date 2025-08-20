@@ -1,3 +1,14 @@
+.noNews {
+    font-family: "Manrope", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.03em;
+    color: #262626;
+    margin-top: 24px;
+    text-align: center;
+}
+
 .newsList {
     display: flex;
     flex-direction: column;
@@ -9,6 +20,12 @@
 
 
 @media (min-width: 768px) {
+    .noNews {
+        font-size: 16px;
+        line-height: 1.25;
+        margin-top: 32px;
+    }
+
     .newsList {
         flex-direction: row;
         flex-wrap: wrap;

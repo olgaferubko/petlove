@@ -54,8 +54,8 @@ export const customSelectStyles = {
     borderRadius: '30px',
     marginTop: 4,
     zIndex: 10,
-    padding: '12px',
-    overflow: 'visible',
+    padding: 0,
+    overflow: 'hidden',
     boxShadow: 'none',
     border: 'none',
   }),
@@ -67,7 +67,8 @@ export const customSelectStyles = {
     flexDirection: 'column',
     justifyContent: 'center',
     gap: 8,
-    paddingTop: '12px',
+    padding: '12px',
+    boxSizing: 'border-box',
 
     '::-webkit-scrollbar': {
       width: '6px',
@@ -90,7 +91,7 @@ export const customSelectStyles = {
     letterSpacing: '-0.03em',
     color: state.isSelected || state.isFocused ? '#f6b83d' : 'rgba(38, 38, 38, 0.6)',
     backgroundColor: 'transparent',
-    padding: '8px',
+    padding: '8px 12px',
   }),
   dropdownIndicator: (provided) => ({
     ...provided,

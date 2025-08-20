@@ -64,7 +64,6 @@ const AddPetForm = () => {
         throw new Error('Invalid response from server');
       }
     } catch (err: unknown) {
-      console.log('ADD PET ERROR:', err);
       const message = err instanceof Error ? err.message : 'Unexpected error';
       toast.error(message);
     }

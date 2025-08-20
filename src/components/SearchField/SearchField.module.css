@@ -62,6 +62,11 @@
     display: block;
 }
 
+.iconClear {
+    stroke: #262626;
+    fill: #262626;
+}
+
 @media (min-width: 768px) {
     .inputWrapper {
         width: 230px;
