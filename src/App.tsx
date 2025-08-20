@@ -6,7 +6,9 @@ import { fetchCurrentUser } from './redux/auth/operations';
 import { selectToken, selectIsRefreshing } from './redux/auth/selectors';
 import PrivateRoute from './components/Routes/PrivateRoute'
 import RestrictedRoute from './components/Routes/RestrictedRoute';
+
 import Loader from './components/Loader/Loader';
+import BaseLoader from './components/BaseLoader/BaseLoader';
 
 const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
@@ -30,42 +32,20 @@ const App: React.FC = () => {
     }, [dispatch, token]);
 
   if (isRefreshing) {
-    return <Loader />; 
+    return token ? <Loader /> : <BaseLoader />;
   }
   
-  
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<BaseLoader />}>
       <Routes>
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute component={<LoginPage />} />
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute component={<RegisterPage />} />
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <PrivateRoute component={<ProfilePage />} />
-          }
-        />
-        <Route
-          path="/add-pet"
-          element={
-            <PrivateRoute component={<AddPage />} />
-          }
-        />
+        <Route path="/login" element={<RestrictedRoute component={LoginPage} />} />
+        <Route path="/register" element={<RestrictedRoute component={RegisterPage} />} />
+        <Route path="/profile" element={<PrivateRoute component={ProfilePage} />} />
+        <Route path="/add-pet" element={<PrivateRoute component={AddPage} />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/notices" element={<NoticesPage />} />
         <Route path="/friends" element={<FriendsPage />} />
-
         <Route path="/" element={<Navigate to="/home" replace />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

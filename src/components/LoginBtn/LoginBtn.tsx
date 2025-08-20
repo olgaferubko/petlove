@@ -4,23 +4,30 @@ import s from './LoginBtn.module.css';
 interface LoginBtnProps {
   onClick?: () => void;
   isModal?: boolean;
+  variant?: 'header' | 'mobileMenu';
 }
 
-const LoginBtn: React.FC<LoginBtnProps> = ({ onClick, isModal }) => {
-  const location = useLocation();
+const LoginBtn: React.FC<LoginBtnProps> = ({ onClick, isModal, variant = 'header' }) => {
+  const { pathname } = useLocation();
   const navigate = useNavigate();
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/register';
+
+  const isHome = pathname === '/home';
+  const isAuthPage = pathname === '/login' || pathname === '/register';
 
   const handleClick = () => {
-    if (onClick) onClick();
+    onClick?.();
     navigate('/login');
   };
 
-  const btnClassName = isModal
-  ? s.modalStyle
-  : isAuthPage
-  ? s.authPageStyle
-  : s.defaultStyle;
+  let btnClassName = s.defaultStyle;
+
+  if (isModal) {
+    btnClassName = s.modalStyle;
+  } else if (variant === 'header') {
+    btnClassName = isHome ? s.homeHeaderStyle : s.defaultStyle;
+  } else if (variant === 'mobileMenu') {
+    btnClassName = isAuthPage ? s.authPageStyle : s.defaultStyle;
+  }
 
   return (
     <button onClick={handleClick} className={btnClassName}>

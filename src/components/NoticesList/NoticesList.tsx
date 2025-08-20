@@ -1,3 +1,4 @@
+import BaseLoader from '../BaseLoader/BaseLoader';
 import NoticesItem from '../NoticesItem/NoticesItem';
 import s from './NoticesList.module.css';
 
@@ -23,7 +24,7 @@ type NoticesListProps = {
 };
 
 const NoticesList: React.FC<NoticesListProps> = ({ notices, isLoading, error }) => {
-  if (isLoading) return <p className={s.status}>Loading notices...</p>;
+  if (isLoading) return <BaseLoader />;
   if (error) return <p className={s.status}>Error: {error}</p>;
   if (notices.length === 0) return <p className={s.status}>Oops, no notices found!</p>;
 

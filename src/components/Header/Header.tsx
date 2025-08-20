@@ -34,7 +34,7 @@ const Header: React.FC = () => {
 
         {isTabletOrDesktop && (
           <div className={s.userNavDesktop}>
-            {isLoggedIn ? <UserNav /> : <div className={s.authNavWrapper}><AuthNav onLinkClick={() => setMenuOpen(false)} /></div>} 
+            {isLoggedIn ? <UserNav /> : <div className={s.authNavWrapper}><AuthNav variant="header" onLinkClick={() => setMenuOpen(false)} /></div>} 
           </div>
         )}
 

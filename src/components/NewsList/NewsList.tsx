@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import NewsItem from '../NewsItem/NewsItem';
+import BaseLoader from '../BaseLoader/BaseLoader';
 import s from './NewsList.module.css';
 
 interface News {
@@ -53,7 +54,7 @@ const NewsList: React.FC<NewsListProps> = ({
     fetchNews();
   }, [keyword, currentPage, pageSize, onTotalChange]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <BaseLoader />;
 
   return (
     <ul className={s.newsList}>

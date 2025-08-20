@@ -39,7 +39,9 @@ const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
-    if (authError) toast.error(authError)
+    if (authError) {
+      toast.error(authError)
+    }
   }, [authError])
 
   const onSubmit = async (data: FormValues) => {
@@ -47,18 +49,14 @@ const LoginForm: React.FC = () => {
       await dispatch(loginUser(data)).unwrap()
       toast.success('Successfully logged in!')
       navigate('/profile', { replace: true })
-    } catch (err: any) {
-      toast.error(err ?? 'Login failed')
+    } catch {
     }
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form} noValidate>
       <div className={s.wrapper}>
-
-        <label
-          className={`${s.field} ${errors.email ? s.invalid : ''}`}
-        >
+        <label className={`${s.field} ${errors.email ? s.invalid : ''}`}>
           <input
             type="email"
             placeholder="Email"
@@ -72,9 +70,7 @@ const LoginForm: React.FC = () => {
             </svg>
           )}
         </label>
-        {errors.email && (
-          <p className={s.error}>{errors.email.message}</p>
-        )}
+        {errors.email && <p className={s.error}>{errors.email.message}</p>}
 
         <label
           className={`${s.field} ${
@@ -105,7 +101,11 @@ const LoginForm: React.FC = () => {
                 className={showPassword ? s.iconEye : s.iconEyeOff}
                 aria-hidden="true"
               >
-                <use href={`${ICONS_SPRITE}${showPassword ? '#icon-eye' : '#icon-eye-off'}`} />
+                <use
+                  href={`${ICONS_SPRITE}${
+                    showPassword ? '#icon-eye' : '#icon-eye-off'
+                  }`}
+                />
               </svg>
             </button>
           </div>
@@ -115,7 +115,6 @@ const LoginForm: React.FC = () => {
         ) : watchedPassword ? (
           <p className={s.success}>Password is secure</p>
         ) : null}
-
       </div>
 
       <button type="submit" className={s.submitBtn} disabled={isLoading}>

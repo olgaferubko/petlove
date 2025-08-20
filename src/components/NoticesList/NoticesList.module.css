@@ -6,16 +6,6 @@
     max-width: 335px;
 }
 
-.status {
-    font-family: "Manrope", sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 1.28571;
-    letter-spacing: -0.02em;
-    text-align: center;
-    color: #262626;
-}
-
 @media (min-width: 768px) {
     .list {
         flex-direction: row;
