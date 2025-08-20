@@ -156,10 +156,15 @@ export const updateUser = createAsyncThunk<
 export const addFavoriteToBackend = createAsyncThunk<
   CurrentUserResponse,
   string,
-  { rejectValue: string }
+  { state: RootState; rejectValue: string }
 >(
   'auth/addFavorite',
-  async (id, { rejectWithValue }) => {
+  async (id, { getState, rejectWithValue }) => {
+    const token = getState().auth.token;
+    if (!token) return rejectWithValue('No token');
+
+    setAuthorizationHeader(token);
+
     try {
       await axios.post(`/notices/favorites/add/${id}`);
       const { data } = await axios.get<CurrentUserResponse>('/users/current/full');
@@ -173,10 +178,15 @@ export const addFavoriteToBackend = createAsyncThunk<
 export const deleteFavoriteFromBackend = createAsyncThunk<
   CurrentUserResponse,
   string,
-  { rejectValue: string }
+  { state: RootState; rejectValue: string }
 >(
   'auth/deleteFavorite',
-  async (id, { rejectWithValue }) => {
+  async (id, { getState, rejectWithValue }) => {
+    const token = getState().auth.token;
+    if (!token) return rejectWithValue('No token');
+
+    setAuthorizationHeader(token);
+
     try {
       await axios.delete(`/notices/favorites/remove/${id}`);
       const { data } = await axios.get<CurrentUserResponse>('/users/current/full');
