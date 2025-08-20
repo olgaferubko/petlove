@@ -2,10 +2,14 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://petlove.b.goit.study/api';
 
-export const setAuthorizationHeader = (token: string) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+export const setAuthorizationHeader = (token?: string | null) => {
+  if (token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete axios.defaults.headers.common.Authorization; 
+  }
 };
 
 export const clearAuthorizationHeader = () => {
-  axios.defaults.headers.common.Authorization = '';
+  delete axios.defaults.headers.common.Authorization;
 };
