@@ -111,6 +111,10 @@ const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.isRefreshing = false;
+        if (action.payload === 'No token, please login again') {
+          return;
+        }
+
         state.error = action.payload as string;
       })
 
