@@ -38,18 +38,14 @@ const LoginForm: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false)
 
-  useEffect(() => {
-    if (authError) {
-      toast.error(authError)
-    }
-  }, [authError])
 
   const onSubmit = async (data: FormValues) => {
     try {
       await dispatch(loginUser(data)).unwrap()
       toast.success('Successfully logged in!')
       navigate('/profile', { replace: true })
-    } catch {
+    } catch (err: any) {
+      toast.error(err?.message || 'Login failed')
     }
   }
 
