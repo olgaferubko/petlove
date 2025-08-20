@@ -10,10 +10,12 @@ import {
 } from './operations';
 import type { User, AuthState, AuthResponse, CurrentUserResponse } from './auth-types';
 
+const savedToken = localStorage.getItem('token');
+
 const initialState: AuthState = {
   user: null,
-  token: null,
-  isLoggedIn: false,
+  token: savedToken,
+  isLoggedIn: Boolean(savedToken),
   isRefreshing: false,
   isLoading: false,
   error: null,
