@@ -15,6 +15,7 @@ interface ModalEditUserProps {
 const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
   const dispatch = useDispatch<AppDispatch>()
   const user = useSelector((state: RootState) => state.auth.user)
+  const token = useSelector((state: RootState) => state.auth.token) 
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -59,7 +60,9 @@ const ModalEditUser = ({ onClose }: ModalEditUserProps) => {
 
     try {
       await dispatch(updateUser(payload)).unwrap()
-      await dispatch(fetchCurrentUser())
+      if (token) {                  
+        await dispatch(fetchCurrentUser())
+      }
       toast.success('User updated successfully')
       onClose()
     } catch (error: any) {
